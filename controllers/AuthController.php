@@ -1,35 +1,31 @@
 <?php
-
+require_once "../config/db.php";
+require_once "../models/User.php";
 
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-
-require_once "db.php";
-
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    http_response_code(200);
     echo json_encode(["success" => false, "message" => "Only POST requests allowed."]);
     exit;
 }
 
-
 $data = json_decode(file_get_contents("php://input"), true);
-
 $username = trim($data["username"] ?? "");
 $password = trim($data["password"] ?? "");
 
 if ($username === "" || $password === "") {
-    echo json_encode(["success" => false, "message" => "Username and password are required."]);
+    http_response_code(200);
+    echo json_encode(["success" => false, "message" => "Username and password required."]);
     exit;
 }
 
-
-$query = "SELECT id, username, password, role FROM users WHERE username = :username";
-$stmt = $pdo->prepare($query);
-$stmt->execute(["username" => $username]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+$db = (new Database())->connect();
+$userModel = new User($db);
+$user = $userModel->findByUsername($username);
 
 if ($user && $user["password"] === $password) {
     echo json_encode([
@@ -37,9 +33,12 @@ if ($user && $user["password"] === $password) {
         "user" => [
             "id" => $user["id"],
             "username" => $user["username"],
-            "role" => $user["role"]
+            "email" => $user["email"],
+            "role" => $user["role"],
+            "barangay" => $user["barangay"]
         ]
     ]);
 } else {
+    http_response_code(200);
     echo json_encode(["success" => false, "message" => "Invalid username or password."]);
 }
