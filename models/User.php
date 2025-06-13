@@ -14,4 +14,14 @@ class User {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+    public function createUser($username, $email, $password, $role, $barangay) {
+    $sql = "INSERT INTO users (username, email, password, role, barangay) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([$username, $email, $password, $role, $barangay]);
+}
+
+
+    
 }
