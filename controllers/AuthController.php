@@ -1,11 +1,10 @@
 <?php
+
+session_start(); 
+
 require_once "../config/db.php";
 require_once "../models/User.php";
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(200);
@@ -38,6 +37,10 @@ if ($user && $user["password"] === $password) {
             "barangay" => $user["barangay"]
         ]
     ]);
+    $_SESSION['user_id'] = $user["id"];
+    $_SESSION['username'] = $user["username"];
+    $_SESSION['role'] = $user["role"];
+
 } else {
     http_response_code(200);
     echo json_encode(["success" => false, "message" => "Invalid username or password."]);
