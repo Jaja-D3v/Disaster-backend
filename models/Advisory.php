@@ -19,7 +19,7 @@ class Advisory {
 
     public function createDisaster($data) {
         $stmt = $this->pdo->prepare("INSERT INTO Disaster_update (img_path, title, details, date_time, disaster_type) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$data['img_path'], $data['title'], $data['details'], $data['dateTime'], $data['disaster_type']]);
+        return $stmt->execute([$data['image'], $data['title'], $data['details'], $data['dateTime'], $data['disasterType']]);
     }
 
     public function createCommunity($data) {
