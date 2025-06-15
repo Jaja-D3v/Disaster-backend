@@ -1,6 +1,5 @@
 <?php
 
-
 require_once "../config/db.php";
 
 header("Access-Control-Allow-Origin: *");
@@ -10,30 +9,36 @@ $db = new Database();
 $pdo = $db->connect();
 
 $type = $_GET['type'] ?? '';
+$id = $_GET['id'] ?? null;
 
-switch ($type) {
-    case 'weather':
-        $stmt = $pdo->query("SELECT * FROM weather_advisories ORDER BY date_time DESC");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+$tableMap = [
+    'weather' => 'weather_advisories',
+    'road' => 'road_advisories',
+    'disaster' => 'Disaster_update',
+    'community' => 'community_notice',
+];
 
-    case 'road':
-        $stmt = $pdo->query("SELECT * FROM road_advisories ORDER BY date_time DESC");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+if (!isset($tableMap[$type])) {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid or missing advisory type."]);
+    exit;
+}
 
-    case 'disaster':
-        $stmt = $pdo->query("SELECT * FROM Disaster_update ORDER BY date_time DESC");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+$table = $tableMap[$type];
 
-    case 'community':
-        $stmt = $pdo->query("SELECT * FROM community_notice ORDER BY date_time DESC");
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-        break;
+try {
+    if ($id) {
+        $stmt = $pdo->prepare("SELECT * FROM $table WHERE id = :id");
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM $table ORDER BY date_time DESC");
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    default:
-        http_response_code(400); 
-        echo json_encode(["error" => "Invalid or missing advisory type."]);
-        break;
+    echo json_encode($result ?: ["message" => "No records found."]);
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(["error" => $e->getMessage()]);
 }
