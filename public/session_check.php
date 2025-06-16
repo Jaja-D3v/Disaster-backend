@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Allow access from your frontend
 header("Access-Control-Allow-Origin: http://localhost:3001"); 
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");

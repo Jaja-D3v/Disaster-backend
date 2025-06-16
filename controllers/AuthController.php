@@ -10,8 +10,9 @@ $secret_key = "your_super_secret_key"; // change this to something private
 $issuedAt = time();
 $expire = $issuedAt + (60 * 60); // 1 hour token validity
 
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *"); // allow from frontend
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(200);
@@ -46,6 +47,8 @@ if ($user && password_verify($password, $user["password"])) {
         ]
     ];
 
+    $userModel->updateLastLogin($user['id']); 
+
     $jwt = JWT::encode($payload, $secret_key, 'HS256');
 
     echo json_encode([
@@ -57,6 +60,7 @@ if ($user && password_verify($password, $user["password"])) {
             "email" => $user["email"],
             "role" => $user["role"],
             "barangay" => $user["barangay"]
+            
         ]
     ]);
 } else {

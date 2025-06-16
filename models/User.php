@@ -16,11 +16,25 @@ class User {
     }
 
 
-    public function createUser($username, $email, $password, $role, $barangay) {
-    $sql = "INSERT INTO users (username, email, password, role, barangay) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $this->pdo->prepare($sql);
-    return $stmt->execute([$username, $email, $password, $role, $barangay]);
-}
+        public function createUser($username, $email, $password, $role, $barangay) {
+        $sql = "INSERT INTO users (username, email, password, role, barangay) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$username, $email, $password, $role, $barangay]);
+    }
+
+        public function findByEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+        
+        public function updateLastLogin($userId) {
+        $stmt = $this->pdo->prepare("UPDATE {$this->table} SET last_logged_in = NOW() WHERE id = ?");
+        return $stmt->execute([$userId]);
+    }
+
+
 
 
     
