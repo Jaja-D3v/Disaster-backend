@@ -23,7 +23,7 @@ if ($username === "" || $email === "" || $password === "") {
     exit;
 }
 
-// Password must be at least 8 characters, include letters and numbers; special characters (_+ etc.) are allowed
+
 if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d_+!@#$%^&*()-=]{8,}$/', $password)) {
     echo json_encode([
         "success" => false,

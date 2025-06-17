@@ -77,9 +77,23 @@ class Advisory {
     }
 
     public function deleteDisaster($id) {
+   
+    $stmt = $this->pdo->prepare("SELECT img_path FROM Disaster_update WHERE id = ?");
+    $stmt->execute([$id]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+   
+        if ($data && isset($data['img_path'])) {
+            $imagePath = "../uploads/disasterPost/" . basename($data['img_path']);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
         $stmt = $this->pdo->prepare("DELETE FROM Disaster_update WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
 
     public function deleteCommunity($id) {
         $stmt = $this->pdo->prepare("DELETE FROM community_notice WHERE id = ?");
@@ -102,8 +116,16 @@ class Advisory {
     public function findDisasterById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM Disaster_update WHERE id = ?");
         $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data && isset($data['img_path'])) {
+            $baseUrl = "http://localhost/disaster-backend/";
+            $data['image_url'] = $baseUrl . $data['img_path'];
+        }
+
+        return $data;
     }
+
 
     public function findCommunityById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM community_notice WHERE id = ?");
@@ -111,10 +133,21 @@ class Advisory {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-        public function getAll($table) {
-        $stmt = $this->pdo->query("SELECT * FROM {$table} ORDER BY date_time DESC");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getAll($table){
+        $stmt = $this->pdo->prepare("SELECT * FROM $table ORDER BY id DESC");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+       
+        foreach ($data as &$row) {
+            if (isset($row['img_path'])) {
+                $row['image_url'] = 'http://localhost/disaster-backend/' . $row['img_path'];
+            }
+        }
+
+        return $data;
     }
+
 
 
 
