@@ -7,6 +7,8 @@ class Advisory {
         $this->pdo = $pdo;
     }
 
+    // PARA SA PAG CREATE NG MGA ADVISORY
+
     public function createWeather($data) {
         $stmt = $this->pdo->prepare("INSERT INTO weather_advisories (title, details, date_time) VALUES (?, ?, ?)");
         return $stmt->execute([$data['title'], $data['details'], $data['dateTime']]);
@@ -26,6 +28,9 @@ class Advisory {
         $stmt = $this->pdo->prepare("INSERT INTO community_notice (title, details, date_time) VALUES (?, ?, ?)");
         return $stmt->execute([$data['title'], $data['details'], $data['dateTime']]);
     }
+
+
+    // PARA SA UPDATE NG MGA ADVISORY
 
     public function updateWeather($id, $data) {
     $stmt = $this->pdo->prepare("UPDATE weather_advisories SET title = ?, details = ?, date_time = ? WHERE id = ?");
@@ -66,6 +71,9 @@ class Advisory {
     }
 
 
+    // PARA SA PAG DELETE NG MGA ADVISORY
+
+
         public function deleteWeather($id) {
     $stmt = $this->pdo->prepare("DELETE FROM weather_advisories WHERE id = ?");
     return $stmt->execute([$id]);
@@ -100,6 +108,9 @@ class Advisory {
         return $stmt->execute([$id]);
     }
 
+
+    // PARA SA PAG FIND NG MGA ADVISORY BY ID
+
     public function findWeatherById($id) {
     $stmt = $this->pdo->prepare("SELECT * FROM weather_advisories WHERE id = ?");
     $stmt->execute([$id]);
@@ -133,7 +144,11 @@ class Advisory {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    // PARA SA PAG GET NG LAHAT NG ADVISORY
+
     public function getAll($table){
+
         $stmt = $this->pdo->prepare("SELECT * FROM $table ORDER BY id DESC");
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
