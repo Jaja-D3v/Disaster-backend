@@ -37,7 +37,7 @@ $user = $userModel->findByUsername($username);
 
 if ($user && password_verify($password, $user["password"])) {
     $payload = [
-        "iss" => "http://localhost", // issuer
+        "iss" => "http://localhost", 
         "iat" => $issuedAt,
         "exp" => $expire,
         "data" => [
@@ -48,6 +48,7 @@ if ($user && password_verify($password, $user["password"])) {
     ];
 
     $userModel->updateLastLogin($user['id']); 
+    $userModel->updateUserStatus($user['id'], 'active');
 
     $jwt = JWT::encode($payload, $secret_key, 'HS256');
 

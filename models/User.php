@@ -34,6 +34,14 @@ class User {
         return $stmt->execute([$userId]);
     }
 
+    public function updateUserStatus($userId, $status) {
+        $stmt = $this->pdo->prepare("UPDATE {$this->table} SET status = :status WHERE id = :id");
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
 
 
 
