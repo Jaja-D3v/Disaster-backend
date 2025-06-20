@@ -7,23 +7,24 @@ class EvacuationCenter {
         $this->pdo = $pdo;
     }
 
-    public function add($data) {
-        $sql = "INSERT INTO {$this->table} 
-            (name, location, capacity, current_evacuees, contact_person, contact_number, lat, `long`) 
-            VALUES (:name, :location, :capacity, :current_evacuees, :contact_person, :contact_number, :lat, :long)";
-        
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            ':name' => $data['name'],
-            ':location' => $data['location'],
-            ':capacity' => $data['capacity'],
-            ':current_evacuees' => $data['current_evacuees'],
-            ':contact_person' => $data['contact_person'],
-            ':contact_number' => $data['contact_number'],
-            ':lat' => $data['lat'],
-            ':long' => $data['long']
-        ]);
-    }
+   public function add($data) {
+    $sql = "INSERT INTO {$this->table} 
+        (name, location, capacity, current_evacuees, contact_person, contact_number, lat, `long`) 
+        VALUES (:name, :location, :capacity, :current_evacuees, :contact_person, :contact_number, :lat, :long)";
+    
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        ':name' => $data['evac_name'],
+        ':location' => $data['evac_location'],
+        ':capacity' => $data['evac_capacity'],
+        ':current_evacuees' => $data['evac_evacuees'],
+        ':contact_person' => $data['evac_contact_person'],
+        ':contact_number' => $data['evac_contact_number'],
+        ':lat' => $data['lat'],
+        ':long' => $data['long']
+    ]);
+}
 
     public function getAll() {
         $stmt = $this->pdo->query("SELECT * FROM {$this->table}");
