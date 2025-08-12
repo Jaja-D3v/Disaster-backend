@@ -40,16 +40,17 @@ class Advisory {
 
     public function updateRoad($id, $data) {
         
-        if (!isset($data['title'], $data['details'], $data['dateTime'], $data['status'])) {
+        if (!isset($data['title'], $data['details'], $data['dateTime'], $data['status'], $data['added_by'])) {
             return false;
         }
 
-        $stmt = $this->pdo->prepare("UPDATE road_advisories SET title = ?, details = ?, date_time = ?, status = ? WHERE id = ?");
+        $stmt = $this->pdo->prepare("UPDATE road_advisories SET title = ?, details = ?, date_time = ?, status = ?, added_by = ?  WHERE id = ?");
         $stmt->execute([
             $data['title'],
             $data['details'],
             $data['dateTime'],
             $data['status'],
+            $data['added_by'],
             $id
         ]);
 
@@ -65,8 +66,8 @@ class Advisory {
     }
 
     public function updateCommunity($id, $data) {
-        $stmt = $this->pdo->prepare("UPDATE community_notice SET title = ?, details = ?, date_time = ? WHERE id = ?");
-        $stmt->execute([$data['title'], $data['details'], $data['dateTime'], $id]);
+        $stmt = $this->pdo->prepare("UPDATE community_notice SET title = ?, details = ?, date_time = ?, added_by = ? WHERE id = ?");
+        $stmt->execute([$data['title'], $data['details'], $data['dateTime'], $data['added_by'], $id]);
         return $stmt->rowCount() > 0;
     }
 
