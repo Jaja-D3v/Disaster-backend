@@ -9,8 +9,8 @@ class EvacuationCenter {
 
    public function add($data) {
     $sql = "INSERT INTO {$this->table} 
-        (name, location, capacity, current_evacuees, contact_person, contact_number, lat, `long`) 
-        VALUES (:name, :location, :capacity, :current_evacuees, :contact_person, :contact_number, :lat, :long)";
+        (name, location, capacity, current_evacuees, contact_person, contact_number, lat, `long`, created_by) 
+        VALUES (:name, :location, :capacity, :current_evacuees, :contact_person, :contact_number, :lat, :long, :created_by)";
     
     $stmt = $this->pdo->prepare($sql);
 
@@ -22,7 +22,8 @@ class EvacuationCenter {
         ':contact_person' => $data['evac_contact_person'],
         ':contact_number' => $data['evac_contact_number'],
         ':lat' => $data['lat'],
-        ':long' => $data['long']
+        ':long' => $data['long'],
+        ':created_by' => $data['created_by']
     ]);
 }
 
@@ -46,7 +47,8 @@ class EvacuationCenter {
         contact_person = :contact_person,
         contact_number = :contact_number,
         lat = :lat,
-        `long` = :long
+        `long` = :long,
+        created_by = :created_by
         WHERE id = :id";
 
     $stmt = $this->pdo->prepare($sql);
@@ -60,6 +62,7 @@ class EvacuationCenter {
         ':contact_number' => $data['contact_number'],
         ':lat' => $data['lat'],
         ':long' => $data['long'],
+        ':created_by' => $data['created_by'],
         ':id' => $id
     ]);
 }
