@@ -46,7 +46,7 @@ switch (true) {
         }
         break;
 
-    case $method === 'POST' && $override === 'PUT':
+    case $method === 'PUT':
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $_GET['id'] ?? null;
 

@@ -54,12 +54,12 @@ class EvacuationCenter {
     $stmt = $this->pdo->prepare($sql);
 
     return $stmt->execute([
-        ':name' => $data['name'],
-        ':location' => $data['location'],
-        ':capacity' => $data['capacity'],
-        ':current_evacuees' => $data['current_evacuees'],
-        ':contact_person' => $data['contact_person'],
-        ':contact_number' => $data['contact_number'],
+        ':name' => $data['evac_name'],
+        ':location' => $data['evac_location'],
+        ':capacity' => $data['evac_capacity'],
+        ':current_evacuees' => $data['evac_evacuees'],
+        ':contact_person' => $data['evac_contact_person'],
+        ':contact_number' => $data['evac_contact_number'],
         ':lat' => $data['lat'],
         ':long' => $data['long'],
         ':created_by' => $data['created_by'],
