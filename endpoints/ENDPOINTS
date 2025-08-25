@@ -1,0 +1,37 @@
+<?php 
+//  http://localhost/Disaster-backend/public/updateAdvisory.php?type=road&id=45
+
+// http://localhost/Disaster-backend/public/deleteAdvisory.php?type=road&id=45
+
+// http://localhost/Disaster-backend/public/getAdvisories.php?type=weather&id=6
+
+// http://localhost/disaster-backend/public/login.php
+
+// http://localhost/disaster-backend/public/register.php
+
+// http://localhost/Disaster-backend/controllers/evacuationCenterController.php    // para sa post, fetch all ng evac
+
+// http://localhost/Disaster-backend/controllers/evacuationCenterController.php?&id=2 // fetch by id , delete, edit 
+
+// http://localhost/Disaster-backend/public/barangayContact.php?id=1   // PUT (edit endpoint)
+
+// http://localhost/Disaster-backend/public/barangayContact.php // fetch all 
+
+// http://localhost/Disaster-backend/public/barangayContact.php?id=1 // fetch by id _method delete by id 
+
+// http://localhost/Disaster-backend/public/AccountSettings.php  //POST
+// {
+//     "action": "updateProfile/changePassword",
+//     "id": 1,
+//     "username": "newusername",
+//     "email": "newemail@example.com",
+//     "password": "currentpassword123"
+// }
+
+// {
+//     "action": "changePassword",
+//     "id": 1,
+//     "currentPassword": "oldpass123",
+//     "newPassword": "newpass456"
+// }
+
