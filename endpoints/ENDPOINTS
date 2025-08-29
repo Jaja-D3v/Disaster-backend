@@ -15,7 +15,19 @@
 
 // http://localhost/Disaster-backend/public/barangayContact.php?id=1   // PUT (edit endpoint)
 
-// http://localhost/Disaster-backend/public/barangayContact.php // fetch all 
+// http://localhost/Disaster-backend/public/barangayContact.php // fetch all/POST
+// SAMPLE LANG ITO NG POST REQUEST
+//{
+//   "barangay_name": "Barangay testing",
+//   "contact_number": "09123456789",
+//   "landline": "049-501-2233",
+//   "email": "barangayuno@gmail.com",
+//   "facebook_page": "fb.com/barangayuno",
+//   "captain_name": "Juan Dela Cruz",
+//   "secretary_name": "Maria Santos",
+//   "lat": "14.1698",
+//   "long": "121.2431"
+// } 
 
 // http://localhost/Disaster-backend/public/barangayContact.php?id=1 // fetch by id _method delete by id 
 
@@ -35,3 +47,14 @@
 //     "newPassword": "newpass456"
 // }
 
+
+//POST http://localhost/Disaster-backend/controllers/locationController.php
+// {
+    //   "type": "Evacuation Center",
+    //   "lat": 14.599512,
+    //   "lng": 120.984222,
+    //   "created_by": 1
+    // }
+
+//DELETE http://localhost/Disaster-backend/controllers/locationController.php?id=1
+    

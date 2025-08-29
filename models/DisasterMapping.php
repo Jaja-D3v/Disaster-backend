@@ -1,0 +1,26 @@
+<?php
+class Location {
+    private $pdo;
+    private $table = "disaster_mapping";
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    
+    public function addLocation($data) {
+        $stmt = $this->pdo->prepare("INSERT INTO {$this->table} (type, lat, lng, created_by) VALUES (?, ?, ?, ?)");
+        return $stmt->execute([
+            $data['type'],
+            $data['lat'],
+            $data['lng'],
+            $data['created_by']
+        ]);
+    }
+
+    
+    public function deleteLocation($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+}
