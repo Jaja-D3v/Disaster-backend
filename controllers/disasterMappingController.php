@@ -4,11 +4,10 @@ require_once "../models/DisasterMapping.php";
 
 header("Content-Type: application/json");
 
-// create database connection
+
 $database = new Database();
 $pdo = $database->connect();
 
-// pass connection to model
 $location = new Location($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -22,15 +21,23 @@ if ($method === "POST") {
         echo json_encode(["success" => false, "message" => "Failed to add location"]);
     }
 
-} elseif ($method === "DELETE") {
+}elseif ($method === "DELETE") {
     $id = $_GET['id'] ?? null;
 
-    if ($id && $location->deleteLocation($id)) {
-        echo json_encode(["success" => true, "message" => "Location deleted successfully"]);
+    if ($id) {
+        if ($location->locationExists($id)) {
+            if ($location->deleteLocation($id)) {
+                echo json_encode(["success" => true, "message" => "Location deleted successfully"]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Failed to delete location"]);
+            }
+        } else {
+            echo json_encode(["success" => false, "message" => "Location not found"]);
+        }
     } else {
-        echo json_encode(["success" => false, "message" => "Failed to delete location"]);
+        echo json_encode(["success" => false, "message" => "Missing ID"]);
     }
-
-} else {
+}
+ else {
     echo json_encode(["success" => false, "message" => "Invalid request"]);
 }

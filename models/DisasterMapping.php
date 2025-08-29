@@ -17,6 +17,12 @@ class Location {
             $data['created_by']
         ]);
     }
+    
+    public function locationExists($id) {
+        $stmt = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
+    }
 
     
     public function deleteLocation($id) {
