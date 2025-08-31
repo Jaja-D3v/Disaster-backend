@@ -48,7 +48,7 @@
 // }
 
 
-//POST http://localhost/Disaster-backend/controllers/locationController.php
+//POST http://localhost/Disaster-backend/public/DisasterMappingController.php
 // {
     //   "type": "Evacuation Center",
     //   "lat": 14.599512,
@@ -56,5 +56,5 @@
     //   "created_by": 1
     // }
 
-//DELETE http://localhost/Disaster-backend/controllers/locationController.php?id=1
+//DELETE http://localhost/Disaster-backend/public/DisasterMappingController.php?id=1
     
