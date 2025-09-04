@@ -29,4 +29,10 @@ class Location {
         $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    public function getAllLocations() {
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} ORDER BY id DESC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

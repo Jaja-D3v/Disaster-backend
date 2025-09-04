@@ -21,6 +21,10 @@ if ($method === "POST") {
         echo json_encode(["success" => false, "message" => "Failed to add location"]);
     }
 
+} elseif ($method === "GET") {
+    $locations = $location->getAllLocations();
+    echo json_encode(["success" => true, "data" => $locations]);
+
 }elseif ($method === "DELETE") {
     $id = $_GET['id'] ?? null;
 

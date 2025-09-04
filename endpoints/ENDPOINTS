@@ -58,4 +58,5 @@
     // }
 
 //DELETE http://localhost/Disaster-backend/public/disasterMapping.php?id=1
+//http://localhost/Disaster-backend/public/disasterMapping.php // GET all locations
     
