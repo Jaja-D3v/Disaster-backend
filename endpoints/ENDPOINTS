@@ -44,7 +44,8 @@
 //     "action": "changePassword",
 //     "id": 1,
 //     "currentPassword": "oldpass123",
-//     "newPassword": "newpass456"
+//     "newPassword": "newpass456",
+ //     "confirmPassword":"123456785"
 // }
 
 

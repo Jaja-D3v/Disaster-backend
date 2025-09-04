@@ -37,21 +37,23 @@ switch ($data['action']) {
             $userId,
             $data['username'],
             $data['email'],
-            $data['password'] // password confirmation
+            $data['password'] 
         ));
         break;
 
     case "changePassword":
-        if (!isset($data['currentPassword'], $data['newPassword'])) {
-            echo json_encode(["success" => false, "message" => "Missing fields."]);
-            exit;
-        }
-        echo json_encode($account->changePassword(
-            $userId,
-            $data['currentPassword'],
-            $data['newPassword']
-        ));
-        break;
+    if (!isset($data['currentPassword'], $data['newPassword'], $data['confirmPassword'])) {
+        echo json_encode(["success" => false, "message" => "Missing fields."]);
+        exit;
+    }
+    echo json_encode($account->changePassword(
+        $userId,
+        $data['currentPassword'],
+        $data['newPassword'],
+        $data['confirmPassword']
+    ));
+    break;
+
 
     default:
         echo json_encode(["success" => false, "message" => "Invalid action."]);
