@@ -59,4 +59,26 @@
 
 //DELETE http://localhost/Disaster-backend/public/disasterMapping.php?id=1
 //http://localhost/Disaster-backend/public/disasterMapping.php // GET all locations
+
+
+//http://localhost/Disaster-backend/public/forgotPass.php?
+//POST
+// {
+//   "email": "jaredabrera44@gmail.com"
+// }
+
+
+ 
+// http://localhost/Disaster-backend/public/resetPass.php?token=4267d3c15f465e0393b77c5f4a792f9e  //POST
+// {
+//   "token": "fe7c8f2e1e154e8efa10543f213926f2",
+//   "password": "NewPassword12345",
+//   "confirmPassword": "NewPassword12345"
+// }
+
+
+
+
+
+
     

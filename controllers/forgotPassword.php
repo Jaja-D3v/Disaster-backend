@@ -1,16 +1,24 @@
 <?php
 require_once "../models/resetAccount.php";
-require_once "../vendor/autoload.php";
+require __DIR__ . '/../vendor/autoload.php';
 require_once "../utils/rateLimiter.php";
 
 require_once "../config/db.php";
 
+
+// ✅ Import Dotenv class
+use Dotenv\Dotenv;
+
+// ✅ Load environment variables
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 $database = new Database();
 $conn = $database->connect();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 
 date_default_timezone_set('Asia/Manila');
 
@@ -35,31 +43,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Create a new token
         $userModel->createResetToken($email, $token, $expires);
 
-        // link na mapupunta sa email
+
         $resetLink = "http://localhost/Disaster-backend/controllers/resetPassword.php?token=$token";
+        
+        $body = " Hi {$user['username']},<br><br>
+                Click this link to reset your password:<br>
+                <a href='$resetLink'>$resetLink</a><br><br>
+                This link will expire in 5 minutes.";
+        
 
         // para sa pag send ng email
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host = "smtp.gmail.com";
+            $mail->Host = $_ENV['SMTP_HOST'];
             $mail->SMTPAuth = true;
-            $mail->Username = "jaredabrera44@gmail.com";
-            $mail->Password = "zmfz sqkz fnor rwcn"; // Gmail app password
-            $mail->SMTPSecure = "tls";
-            $mail->Port = 587;
+            $mail->Username =  $_ENV['SMTP_EMAIL'];
+            $mail->Password = $_ENV['SMTP_PASSWORD'];
+            $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+            $mail->Port = $_ENV['SMTP_PORT'];
 
-            $mail->setFrom("disasterready@gmail.com", "DisasterReady App");
+            $mail->setFrom($_ENV['SMTP_EMAIL'], $_ENV['FROM_NAME']);
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = "DisasterReady Password Reset";
-            $mail->Body = "
-                Hi {$user['username']},<br><br>
-                Click this link to reset your password:<br>
-                <a href='$resetLink'>$resetLink</a><br><br>
-                This link will expire in 5 minutes.
-            ";
-
+            $mail->Body = ($body);
             $mail->send();
         } catch (Exception $e) {
             echo json_encode([
