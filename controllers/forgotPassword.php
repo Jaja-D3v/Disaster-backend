@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         $token = bin2hex(random_bytes(16));
-        $expires = date("Y-m-d H:i:s", strtotime("+15 minutes"));
+        $expires = date("Y-m-d H:i:s", strtotime("+5 minutes"));
 
         // para sa old tokens  
         $userModel->deleteResetTokenByEmail($email);
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 Hi {$user['username']},<br><br>
                 Click this link to reset your password:<br>
                 <a href='$resetLink'>$resetLink</a><br><br>
-                This link will expire in 15 minutes.
+                This link will expire in 5 minutes.
             ";
 
             $mail->send();
