@@ -1,6 +1,13 @@
 <?php
 require_once "../models/resetAccount.php";
 require_once "../vendor/autoload.php";
+require_once "../utils/rateLimiter.php";
+
+require_once "../config/db.php";
+
+
+$database = new Database();
+$conn = $database->connect();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,6 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $userModel = new User();
     $user = $userModel->findByEmail($email);
+     $rateLimiter = new RateLimiter($conn);
+
+    // Instantiate RateLimiter
+    $rateLimiter = new RateLimiter($conn);
+    $rateLimiter->checkLimit($email, 'forgot_password');
 
     if ($user) {
         $token = bin2hex(random_bytes(16));
