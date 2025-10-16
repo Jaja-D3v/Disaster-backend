@@ -57,11 +57,11 @@ switch ($type) {
             exit();
         }
 
-        // Optional: Fetch existing image to delete if replacing
+     
         $existing = $advisory->findDisasterById($id);
         $oldImagePath = $existing['img_path'] ?? null;
 
-        // Check for new uploaded image
+      
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = __DIR__ . '/../uploads/disasterPost/';
             if (!is_dir($uploadDir)) {
@@ -78,7 +78,7 @@ switch ($type) {
                 exit();
             }
 
-            // Delete old image if new one is uploaded
+          
             if ($oldImagePath) {
                 $oldFullPath = __DIR__ . '/../' . $oldImagePath;
                 if (file_exists($oldFullPath)) {
@@ -88,10 +88,10 @@ switch ($type) {
 
             $imagePath = 'uploads/disasterPost/' . $imageName;
         } else {
-            $imagePath = $oldImagePath; // Keep old image if none uploaded
+            $imagePath = $oldImagePath; 
         }
 
-        // Build updated data
+        
         $data = [
             'title' => $title,
             'details' => $details,

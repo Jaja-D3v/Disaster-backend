@@ -6,9 +6,9 @@ require_once "../vendor/autoload.php";
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$secret_key = "your_super_secret_key"; // change this to something private
+$secret_key = "your_super_secret_key"; 
 $issuedAt = time();
-$expire = $issuedAt + (60 * 60); // 1 hour token validity
+$expire = $issuedAt + (60 * 60); // 1 hour expiration ng token
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
