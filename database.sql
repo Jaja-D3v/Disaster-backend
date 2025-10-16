@@ -378,3 +378,12 @@ CREATE TABLE password_resets (
   token VARCHAR(255) NOT NULL,
   expires_at DATETIME NOT NULL
 );
+
+
+CREATE TABLE password_request_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip_address VARCHAR(45) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
