@@ -400,4 +400,6 @@ CREATE TABLE incidents (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+ALTER TABLE incident_reports ADD COLUMN lat DECIMAL(10,8) NULL, ADD COLUMN lng DECIMAL(11,8) NULL, ADD COLUMN severity ENUM('Critical', 'Moderate', 'Minor') DEFAULT 'Minor';
+
 
