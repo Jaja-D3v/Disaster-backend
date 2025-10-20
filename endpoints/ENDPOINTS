@@ -68,7 +68,7 @@
 // }
 
 
-// for forgot password reset link
+// for forgot password reset link333333333333333333333333
 
  
 // http://localhost/Disaster-backend/public/resetPass.php?token=4267d3c15f465e0393b77c5f4a792f9e  //POST
@@ -88,6 +88,8 @@
 //   "responded_by": "Jared Abrera"
 // }
 
+
+// POST http://localhost/Disaster-backend/public/createIncident.php
 
 
 
