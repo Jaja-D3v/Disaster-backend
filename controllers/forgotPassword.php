@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->setFrom($_ENV['SMTP_EMAIL'], $_ENV['FROM_NAME']);
             $mail->addAddress($email);
             $mail->isHTML(true);
-            $mail->Subject = "DisasterReady Password Reset";
+            $mail->Subject = "Disaster Ready Password Reset";
             $mail->Body = ($body);
             $mail->send();
         } catch (Exception $e) {
