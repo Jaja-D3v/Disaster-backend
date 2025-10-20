@@ -388,7 +388,7 @@ CREATE TABLE password_request_logs (
 );
 
 
-CREATE TABLE incidents (
+CREATE TABLE incident_reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     reporter_name VARCHAR(100) NULL,
     reporter_contact VARCHAR(20) NOT NULL,
