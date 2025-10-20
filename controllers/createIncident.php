@@ -14,6 +14,9 @@ $incidentModel = new Incident($pdo);
 $reporter_name = $_POST['reporter_name'] ?? null;
 $reporter_contact = $_POST['reporter_contact'] ?? null;
 $description = $_POST['description'] ?? null;
+$lat = $_POST['lat'] ?? null;
+$lng = $_POST['lng'] ?? null;
+$severity = $_POST['severity'] ?? null;
 
 if (!$reporter_contact || !$description) {
     echo json_encode(['error' => 'Contact and description are required']);
@@ -41,7 +44,7 @@ if (!empty($_FILES['media']['name'])) {
 }
 
 // Insert into DB
-$id = $incidentModel->createIncident($reporter_name, $reporter_contact, $description, $media_path);
+$id = $incidentModel->createIncident($reporter_name, $reporter_contact, $description,$lat ,$lng, $severity, $media_path);
 
 if ($id) {
     echo json_encode([
