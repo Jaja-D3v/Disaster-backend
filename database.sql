@@ -387,3 +387,17 @@ CREATE TABLE password_request_logs (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+
+CREATE TABLE incidents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reporter_name VARCHAR(100) NULL,
+    reporter_contact VARCHAR(20) NOT NULL,
+    description TEXT NOT NULL,
+    media VARCHAR(255) NULL,      -- store the uploaded photo path as string
+    status ENUM('Pending','Ongoing','Resolved') DEFAULT 'Pending',
+    responded_by VARCHAR(100) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
