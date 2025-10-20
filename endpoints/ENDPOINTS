@@ -92,7 +92,7 @@
 // POST http://localhost/Disaster-backend/public/createIncident.php
 
 
-//http://localhost/Disaster-backend/controllers/getIncidents.php
+//http://localhost/Disaster-backend/controllers/getIncidents.php // for fetching all incidents
 
 
 
