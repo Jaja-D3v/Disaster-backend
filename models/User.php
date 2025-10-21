@@ -2,6 +2,7 @@
 class User {
     private $pdo;
     private $table = "users";
+    private $pendingTable = "pending_registrations";
 
     public function __construct($db) {
         $this->pdo = $db;
@@ -41,7 +42,32 @@ class User {
         return $stmt->execute();
     }
 
+     // Pending registration methods
+    public function createPending($username, $email, $password, $barangay, $code, $expires) {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO {$this->pendingTable} (username, email, password, barangay, code, expires)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE code = ?, expires = ?
+        ");
+        return $stmt->execute([$username, $email, $password, $barangay, $code, $expires, $code, $expires]);
+    }
 
+     public function getPending($email) {
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->pendingTable} WHERE email = ? LIMIT 1");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deletePending($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM {$this->pendingTable} WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
+    public function countUsers() {
+    $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM users");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row['total'] ?? 0;
+}
 
 
 

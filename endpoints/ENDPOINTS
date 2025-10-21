@@ -96,6 +96,36 @@
 
 
 
+//para sa fogot pass at reset password
+//{
+//   "email": "jaredabrera44@gmail.com",
+//   "type": ""
+// }
+
+// http://localhost/Disaster-backend/controllers/trial.php? // POST
+
+
+
+// SAMPLE REQUEST BODY FOR ACCOUNT REGISTRATION REQUEST
+
+// http://localhost/Disaster-backend/public/accountRequest.php POST
+// {
+//     "username": "jaredtest",
+//     "email": "jaredabrera44@gmail.com",
+//     "password": "Password123",
+//     "confirm_password": "Password123",
+//     "barangay": "Central"
+// }
+
+
+// SAMPLE REQUEST BODY FOR ACCOUNT VERIFICATION
+//http://localhost/Disaster-backend/public/accountVerification.php
+
+
+// {
+//     "email": "jaredabrera44@gmail.com",
+//     "code": "196090"
+// }
 
 
 
