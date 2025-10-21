@@ -107,7 +107,7 @@ class User {
 
     
     if (password_verify($newPassword, $user['password'])) {
-        return ["success" => false, "message" => "New password cannot be the same as the current one."];
+        return ["success" => false, "message" => "Password update failed. The new password matches one of your previous passwords. Please use a unique password."];
     }
 
     
