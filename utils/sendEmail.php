@@ -18,8 +18,22 @@ function sendEmail($to, $subject, $body) {
         $mail->SMTPAuth = true;
         $mail->Username = $_ENV['SMTP_EMAIL'];
         $mail->Password = $_ENV['SMTP_PASSWORD'];
-        $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
-        $mail->Port = $_ENV['SMTP_PORT'];
+
+
+
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // ✅ Correct for port 587
+$mail->Port = (int)$_ENV['SMTP_PORT'];
+
+// ✅ Add this for local testing to skip SSL certificate verification
+$mail->SMTPOptions = [
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true,
+    ],
+];
+        // $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+        // $mail->Port = $_ENV['SMTP_PORT'];
 
         // ✅ Recipients
         $mail->setFrom($_ENV['SMTP_EMAIL'], $_ENV['FROM_NAME']);

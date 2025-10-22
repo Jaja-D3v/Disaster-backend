@@ -403,3 +403,16 @@ CREATE TABLE incident_reports (
 ALTER TABLE incident_reports ADD COLUMN lat DECIMAL(10,8) NULL, ADD COLUMN lng DECIMAL(11,8) NULL, ADD COLUMN severity ENUM('Critical', 'Moderate', 'Minor') DEFAULT 'Minor';
 
 
+//new table
+CREATE TABLE pending_registrations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    email VARCHAR(100),
+    password VARCHAR(255),
+    barangay VARCHAR(50),
+    code VARCHAR(6),
+    expires DATETIME
+);
+
+
+
