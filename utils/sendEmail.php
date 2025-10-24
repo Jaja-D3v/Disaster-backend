@@ -25,13 +25,13 @@ function sendEmail($to, $subject, $body) {
 $mail->Port = (int)$_ENV['SMTP_PORT'];
 
 // ✅ Add this for local testing to skip SSL certificate verification
-$mail->SMTPOptions = [
-    'ssl' => [
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true,
-    ],
-];
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ];
         // $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
         // $mail->Port = $_ENV['SMTP_PORT'];
 
