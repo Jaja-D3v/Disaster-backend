@@ -37,9 +37,9 @@ if ($success && strtolower($status) === 'ongoing') {
 
     $username = "jarejare5kcux2025";  
     $password = "eTeDRLyd"; 
-    $sender = "DisasterApp";         
+    $sender = "wish";         
     $recipient = $reporter_contact;  // From DB
-    $message = "Hello from DisasterReadyApp! Incident status has been updated to '{$status}' by responder '{$responded_by}'.";
+    $message = "Hello from DisasterReadyApp! Incident status has been updated to {$status} by responder {$responded_by}.";
 
     $type = 0; // 0 = plain text
 
