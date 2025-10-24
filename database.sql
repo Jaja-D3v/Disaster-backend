@@ -403,7 +403,7 @@ CREATE TABLE incident_reports (
 ALTER TABLE incident_reports ADD COLUMN lat DECIMAL(10,8) NULL, ADD COLUMN lng DECIMAL(11,8) NULL, ADD COLUMN severity ENUM('Critical', 'Moderate', 'Minor') DEFAULT 'Minor';
 
 
-//new table
+
 CREATE TABLE pending_registrations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
@@ -412,6 +412,20 @@ CREATE TABLE pending_registrations (
     barangay VARCHAR(50),
     code VARCHAR(6),
     expires DATETIME
+);
+
+//new table for donations
+
+CREATE TABLE donations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    payment_intent_id VARCHAR(255) NOT NULL,
+    donor_name VARCHAR(255) DEFAULT 'Anonymous Donor',
+    donor_email VARCHAR(255) DEFAULT 'noemail@disasterready.app',
+    amount INT NOT NULL,
+    currency VARCHAR(10) DEFAULT 'PHP',
+    payment_method VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
