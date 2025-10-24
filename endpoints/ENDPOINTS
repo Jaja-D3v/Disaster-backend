@@ -130,6 +130,32 @@
 
 
 
+// SAMPLE REQUEST PARA SA PAYMENT INTENT UNANG FORM
+// http://localhost/Disaster-backend/public/createPaymentIntent.php //POST
+//
+//{
+//   "amount": 10000,
+//   "description": "Donation test"
+// }
+
+
+
+// SAMPLE REQUEST PARA SA ATTACH PAYMENT METHOD 2ND FORM
+// http://localhost/Disaster-backend/public/attachPaymentMethod.php //POST
+//{
+//   "payment_intent_id": "pi_Grfdux3azHh3Bmd4Dnjdhzgy",
+//   "type": "gcash",            // or "grab_pay", "card", "paymaya"
+//   "name": "Jared Abrera",
+//   "email": "jared@example.com",
+//   "return_url": "http://localhost/Disaster-backend/public/attachmentPaymentMethod.php"
+// }
+
+
+
+
+
+
+
 
 
     

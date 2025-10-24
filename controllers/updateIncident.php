@@ -39,9 +39,9 @@ if ($success && strtolower($status) === 'ongoing') {
     $password = "eTeDRLyd"; 
     $sender = "wish";         
     $recipient = $reporter_contact;  // From DB
-    $message = "Hello from DisasterReadyApp! Incident status has been updated to {$status} by responder {$responded_by}.";
+    $message = "Hello from DisasterReadyApp! The responder is on the way. Responder: {$responded_by}.";
 
-    $type = 0; // 0 = plain text
+    $type = 0; 
 
     $curl = curl_init();
     curl_setopt_array($curl, [
