@@ -144,12 +144,33 @@
 // http://localhost/Disaster-backend/public/attachPaymentMethod.php //POST
 //{
 //   "payment_intent_id": "pi_Grfdux3azHh3Bmd4Dnjdhzgy",
-//   "type": "gcash",            // or "grab_pay", "card", "paymaya"
+//   "type": "gcash",           
 //   "name": "Jared Abrera",
 //   "email": "jared@example.com",
 //   "return_url": "http://localhost/Disaster-backend/public/attachmentPaymentMethod.php"
 // }
 
+// OR FOR CARD PAYMENT METHOD
+//{
+//   "payment_intent_id": "pi_k2acE85ovSoNzhRNXAdf5Gh8",
+//   "type": "card",
+//   "details": {
+//     "card_number": "4343434343434345",
+//     "exp_month": 12,
+//     "exp_year": 2030,
+//     "cvc": "123"
+//   },
+//   "name": "Jared Abrera",
+//   "email": "jared@example.com.ph",
+//   "return_url": "http://localhost/Disaster-backend/public/attachmentPaymentMethod.php"
+// }
+
+
+
+
+
+// ngronk
+// .\ngrok\ngrok.exe http 8000
 
 
 

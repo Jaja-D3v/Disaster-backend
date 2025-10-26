@@ -1,0 +1,119 @@
+2025-10-26 06:31:16 | {"data":{"id":"evt_1V1yn92TEaERekMGD75hqXkW","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_8hmGL1PjLbMY2gPAbm3rYHV9","type":"payment","attributes":{"access_url":null,"amount":800000,"balance_transaction_id":"bal_txn_YZkzM3dCtffmRyS4xzqbKfEr","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":29500,"foreign_fee":8000,"instant_settlement":null,"livemode":false,"net_amount":762500,"origin":"api","payment_intent_id":"pi_wcooazuJnNobeZzBkWS63MF6","payout":null,"source":{"id":"card_7wSFsuYhPXC21GEbiWmooXSx","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761456595,"credited_at":1762304400,"paid_at":1761456595,"updated_at":1761456595}},"previous_data":[],"pending_webhooks":1,"created_at":1761456595,"updated_at":1761456595}}}
+Ignored event type: 
+2025-10-26 06:31:52 | {"data":{"id":"evt_jTzHNSyNdgsmjjH1uqaBmTVU","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_DL4i6VMp57nrFJW9KvrrW91t","type":"payment","attributes":{"access_url":null,"amount":900000,"balance_transaction_id":"bal_txn_J7Wc1tfoeXGppSd7ffVxzfbs","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":33000,"foreign_fee":9000,"instant_settlement":null,"livemode":false,"net_amount":858000,"origin":"api","payment_intent_id":"pi_z8b9MENt9RcWSBcFpFY5Smu9","payout":null,"source":{"id":"card_ycG9PomGmRgdXbBCGdcywhPN","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761456712,"credited_at":1762304400,"paid_at":1761456711,"updated_at":1761456712}},"previous_data":[],"pending_webhooks":1,"created_at":1761456712,"updated_at":1761456712}}}
+Ignored event type: 
+2025-10-26 06:36:21 | {"data":{"id":"evt_tB6eXEfoEitBwv9bmHL9n8Dw","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_vkznH5JbEt2j9ikuTMM1gmaU","type":"payment","attributes":{"access_url":null,"amount":900000,"balance_transaction_id":"bal_txn_qNmMwCNHbAMXj9MmWgbFRMyK","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":33000,"foreign_fee":9000,"instant_settlement":null,"livemode":false,"net_amount":858000,"origin":"api","payment_intent_id":"pi_eCq2L5vQLZELapHGCEVjWCvY","payout":null,"source":{"id":"card_FFAFDdzGZdMQuKzQgykwZH7T","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761456981,"credited_at":1762304400,"paid_at":1761456981,"updated_at":1761456981}},"previous_data":[],"pending_webhooks":1,"created_at":1761456981,"updated_at":1761456981}}}
+Event type:  | Payment Intent: evt_tB6eXEfoEitBwv9bmHL9n8Dw | Payment Method: 
+Ignored event or missing payment_intent_id.
+Invalid signature
+Invalid signature
+Invalid signature
+Invalid signature
+Invalid signature
+Invalid signature
+Invalid signature
+2025-10-26 06:51:24 | {"data":{"id":"evt_test123","type":"event","attributes":{"type":"payment.paid","data":{"id":"pi_TEST12345","attributes":{"payments":[{"payment_method_type":"card","id":"pay_TEST12345"}]}}}}}
+Updated donation pi_TEST12345 with card
+Invalid signature
+2025-10-26 06:52:26 | {"data":{"id":"evt_test123","type":"event","attributes":{"type":"payment.paid","data":{"id":"pi_aZYYg2yYPW9U7oKXs34drQ9R","attributes":{"payments":[{"payment_method_type":"card","id":"pay_TEST12345"}]}}}}}
+Updated donation pi_aZYYg2yYPW9U7oKXs34drQ9R with card
+Invalid signature
+2025-10-26 06:57:47 | {"data":{"id":"evt_afcsuaJuAy6PG7uM98vF5N7h","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_RQTeUzUvoSBFK4aSzix8pYqD","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_DYC9JATCrM9CgRGbxNCMmyy5","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_WWndN3gKD9szKrizZq1VGmED","payout":null,"source":{"id":"card_ZZgA4NoGCXrmCnqav16WGji4","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761458266,"credited_at":1762304400,"paid_at":1761458266,"updated_at":1761458266}},"previous_data":[],"pending_webhooks":1,"created_at":1761458266,"updated_at":1761458266}}}
+Updated donation pay_RQTeUzUvoSBFK4aSzix8pYqD with 
+2025-10-26 07:00:28 | {"data":{"id":"evt_7BBp5VjVway7c4iEEbJWdgsx","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_XS4rPj5BjwicnUt1iYHHMnYM","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_qExobSGh4KA3UvaeqJyCTT9Y","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_yx1bRTxBnrTa2SaLVGyKQVvB","payout":null,"source":{"id":"card_DQAFc2BGGTbkqqVQDnMYxsst","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761458427,"credited_at":1762304400,"paid_at":1761458427,"updated_at":1761458427}},"previous_data":[],"pending_webhooks":1,"created_at":1761458427,"updated_at":1761458427}}}
+Updated donation pay_XS4rPj5BjwicnUt1iYHHMnYM with 
+2025-10-26 07:05:05 | {"data":{"id":"evt_JLZ91pQXwRBM7hpWyQuRKYUD","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_36dtQUnQ8XwqGjvf77CS8e7b","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_VB2ep2uMiaHBYjR775ux39MX","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_aZYYg2yYPW9U7oKXs34drQ9R","payout":null,"source":{"id":"card_7N2cncSJeygJoDJBrRDeyHgw","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761457647,"credited_at":1762304400,"paid_at":1761457647,"updated_at":1761457647}},"previous_data":[],"pending_webhooks":1,"created_at":1761457648,"updated_at":1761457648}}}
+Updated donation pay_36dtQUnQ8XwqGjvf77CS8e7b with 
+2025-10-26 07:27:10 | {"data":{"id":"evt_test123","type":"event","attributes":{"type":"payment.paid","data":{"id":"pi_aZYYg2yYPW9U7oKXs34drQ9R","attributes":{"payments":[{"payment_method_type":"card","id":"pay_TEST12345"}]}}}}}
+2025-10-26 07:27:10 | Updated donation pi_aZYYg2yYPW9U7oKXs34drQ9R with card
+2025-10-26 07:30:52 | {"data":{"id":"evt_test123","type":"event","attributes":{"type":"payment.paid","data":{"id":"pi_WWndN3gKD9szKrizZq1VGmED","attributes":{"payments":[{"payment_method_type":"card","id":"pay_TEST12345"}]}}}}}
+2025-10-26 07:30:52 | Updated donation pi_WWndN3gKD9szKrizZq1VGmED with card
+2025-10-26 07:31:43 | {"data":{"id":"evt_5VWgfCt3z7Cc7W5ZrDuXHuoK","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_YdEfTXJM5SeNWCCGg9uos49D","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_t2jMCzouPMeEe54DJpoHZACZ","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_wguysswCHWsBeFNETGHQ2CTw","payout":null,"source":{"id":"card_b3VJ5xTxhE6eox5XuudSpUg8","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761460302,"credited_at":1762304400,"paid_at":1761460302,"updated_at":1761460302}},"previous_data":[],"pending_webhooks":1,"created_at":1761460302,"updated_at":1761460302}}}
+2025-10-26 07:31:43 | Updated donation pay_YdEfTXJM5SeNWCCGg9uos49D with unknown
+2025-10-26 07:37:08 | Payload: {"data":{"id":"evt_fzFkAkLZDPZGZS4TiRz5DuXL","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_knCGMGmDk4yhCJqSCQvHnDfv","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_d9FJnwMhB7Kz5mvYRhAE59E3","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_LS4BxU27XfQR3Zunc9xsLprp","payout":null,"source":{"id":"card_VwDBZGDUDEnVprLLsxbjmpKB","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761460627,"credited_at":1762304400,"paid_at":1761460627,"updated_at":1761460627}},"previous_data":{},"pending_webhooks":1,"created_at":1761460627,"updated_at":1761460627}}}
+Updated donation pay_knCGMGmDk4yhCJqSCQvHnDfv with unknown
+2025-10-26 07:47:35 | Payload: {"data":{"id":"evt_Q6MMq6crgai3cNcFqyVVxuLR","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_M1NPd9PJexGHY2qZJnqKD1Ki","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_3hU3KCw49d54sRHpeBbofbev","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_Hej4PoACMYPpge9hohs1zB1D","payout":null,"source":{"id":"card_LU2NXPpj6pfNZmgvqA69Tn5m","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761461255,"credited_at":1762304400,"paid_at":1761461255,"updated_at":1761461255}},"previous_data":{},"pending_webhooks":1,"created_at":1761461255,"updated_at":1761461255}}}
+Updated donation pay_M1NPd9PJexGHY2qZJnqKD1Ki with unknown
+2025-10-26 07:49:14 | Payload: {"data":{"id":"evt_CYBuNTtUkua2WuRNSdsCjoSG","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_hN6y2SpKVcwvKnoD5CrQ3Php","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_nwESjuFC82RY6vSkMgFjmkuv","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_nc9t8qU6uUPLDHstZqM9oHfJ","payout":null,"source":{"id":"card_fBKZLk2H3kswpLAmFd6uDKUk","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761461354,"credited_at":1762304400,"paid_at":1761461354,"updated_at":1761461354}},"previous_data":{},"pending_webhooks":1,"created_at":1761461354,"updated_at":1761461354}}}
+Updated donation pay_hN6y2SpKVcwvKnoD5CrQ3Php with unknown
+2025-10-26 07:50:02 | Payload: {
+  "data": {
+    "id": "evt_CYBuNTtUkua2WuRNSdsCjoSG",
+    "type": "event",
+    "attributes": {
+      "type": "payment.paid",
+      "data": {
+        "id": "pay_hN6y2SpKVcwvKnoD5CrQ3Php",
+        "attributes": {
+          "payments": [
+            {
+              "payment_method_type": "card",
+              "id": "pay_TEST12345"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+Updated donation pay_hN6y2SpKVcwvKnoD5CrQ3Php with card
+2025-10-26 07:51:45 | Payload: {
+  "data": {
+    "id": "evt_test123",
+    "type": "event",
+    "attributes": {
+      "type": "payment.paid",
+      "data": {
+        "id": "pi_nc9t8qU6uUPLDHstZqM9oHfJ",
+        "attributes": {
+          "payments": [
+            {
+              "payment_method_type": "card",
+              "id": "pay_TEST12345"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+Updated donation pi_nc9t8qU6uUPLDHstZqM9oHfJ with card
+2025-10-26 07:54:35 | Payload: {
+  "data": {
+    "id": "evt_test123",
+    "type": "event",
+    "attributes": {
+      "type": "payment.paid",
+      "data": {
+        "id": "pi_nc9t8qU6uUPLDHstZqM9oHfJ",
+        "attributes": {
+          "payments": [
+            {
+              "payment_method_type": "card",
+              "id": "pay_TEST12345"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+Updated donation pi_nc9t8qU6uUPLDHstZqM9oHfJ with card
+2025-10-26 08:00:06 | Raw payload: {"data":{"id":"evt_EZiWTWN9QTbYErTBsxkx2mnV","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_qCd6QVppY9XiCurLKH8mDfxh","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_TMSdcX5D3YrauSrJmY5LgURa","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_3thBuTzkH5atsFomcceCQ17H","payout":null,"source":{"id":"card_MMziSM7qE52PXrrmapYjPbZ6","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761462003,"credited_at":1762304400,"paid_at":1761462003,"updated_at":1761462003}},"previous_data":{},"pending_webhooks":1,"created_at":1761462003,"updated_at":1761462003}}}
+Received event: payment.paid
+Updated donation pay_qCd6QVppY9XiCurLKH8mDfxh with unknown
+2025-10-26 08:03:07 | Raw payload: {"data":{"id":"evt_zobN43Up9X46C2CuX7hpfC9Q","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_zdTQrLntRr8nRbe54z5K4P53","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_mVfrTzNWyus8KRnBmg5wjqKE","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"sample test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_7V8B8GLyfY6kXmzj1unQnFLE","payout":null,"source":{"id":"card_W3J9oxFu97niYHVM6F5wbrRx","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761462187,"credited_at":1762304400,"paid_at":1761462187,"updated_at":1761462187}},"previous_data":{},"pending_webhooks":1,"created_at":1761462187,"updated_at":1761462187}}}
+Received event: payment.paid
+Updated donation pay_zdTQrLntRr8nRbe54z5K4P53 with unknown
+2025-10-26 08:04:36 | Raw payload: {"data":{"id":"evt_GweuxSGbs83ZYpFcZpjLxvrA","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_oWhfVFfnRnMMHoA4QFDHPT7L","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_6aodAXqztvETh4d3QEwLJfyf","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"gana ka na test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_ECZKujqYZrefeGXPept7TjUs","payout":null,"source":{"id":"card_ZUj2sVdrRprr8Mb462SHbV84","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761462275,"credited_at":1762304400,"paid_at":1761462275,"updated_at":1761462275}},"previous_data":[],"pending_webhooks":1,"created_at":1761462275,"updated_at":1761462275}}}
+2025-10-26 08:04:36 | Received event: payment.paid
+2025-10-26 08:04:36 | Updated donation pay_oWhfVFfnRnMMHoA4QFDHPT7L with card
+2025-10-26 08:08:03 | Raw payload: {"data":{"id":"evt_UjwSP1sjTohtC8SDzCgrFYji","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_9E53ZUhgAPubHSaD6Y38p2FE","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_wS2JagDw4bzPasMWcXuQrKCA","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com.ph","name":"Jared Abrera","phone":null},"currency":"PHP","description":"gana ka na test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1588,"foreign_fee":25,"instant_settlement":null,"livemode":false,"net_amount":887,"origin":"api","payment_intent_id":"pi_YuXssUsGfpNp2pCoW7JmncTx","payout":null,"source":{"id":"card_UAn9or8jeMiz9YehnXdgoPBP","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761462482,"credited_at":1762304400,"paid_at":1761462482,"updated_at":1761462482}},"previous_data":{},"pending_webhooks":1,"created_at":1761462482,"updated_at":1761462482}}}
+2025-10-26 08:08:03 | Received event: payment.paid
+2025-10-26 08:08:03 | Updated donation pi_YuXssUsGfpNp2pCoW7JmncTx with card
+2025-10-26 08:09:51 | Raw payload: {"data":{"id":"evt_9uP7AFHLGKBy7bTCJXDvXV7d","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_TUeJnCVN5bvCDCjrPnyMsx3d","type":"payment","attributes":{"access_url":null,"amount":2500,"balance_transaction_id":"bal_txn_H2af1E2ZZCcsAxHDUePt9VBZ","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"gana ka na test","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":63,"instant_settlement":null,"livemode":false,"net_amount":2437,"origin":"api","payment_intent_id":"pi_a1bvobZ4TSh6eQ5WACThaHJ3","payout":null,"source":{"id":"src_3xYyhBRGs6bHnRr7TUJGNiHr","type":"gcash","provider":{"id":null},"provider_id":null},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761728400,"created_at":1761462590,"credited_at":1762304400,"paid_at":1761462590,"updated_at":1761462590}},"previous_data":{},"pending_webhooks":1,"created_at":1761462591,"updated_at":1761462591}}}
+2025-10-26 08:09:51 | Received event: payment.paid
+2025-10-26 08:09:51 | Updated donation pi_a1bvobZ4TSh6eQ5WACThaHJ3 with gcash
