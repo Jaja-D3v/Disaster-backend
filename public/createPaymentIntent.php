@@ -6,7 +6,8 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
 $input = json_decode(file_get_contents("php://input"), true);
 
 if (!$input || !isset($input['amount']) || !isset($input['description'])) {
@@ -64,3 +65,6 @@ if (isset($resp["data"]["id"])) {
 
 http_response_code($http_status);
 echo $response;
+
+
+}
