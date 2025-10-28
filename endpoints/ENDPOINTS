@@ -128,42 +128,40 @@
 // }
 
 
+//http://localhost/Disaster-backend/public/donationController.php POST
 
 
-// SAMPLE REQUEST PARA SA PAYMENT INTENT UNANG FORM
-// http://localhost/Disaster-backend/public/createPaymentIntent.php //POST
-//
-//{
-//   "amount": 10000,
-//   "description": "Donation test"
-// }
-
-
-
-// SAMPLE REQUEST PARA SA ATTACH PAYMENT METHOD 2ND FORM
-// http://localhost/Disaster-backend/public/attachPaymentMethod.php //POST
-//{
-//   "payment_intent_id": "pi_Grfdux3azHh3Bmd4Dnjdhzgy",
-//   "type": "gcash",           
+// FOR CARD PAYMENT
+// {
+//   "amount": 2000,
+//   "description": "Donation using card",
+//   "type": "card",
 //   "name": "Jared Abrera",
 //   "email": "jared@example.com",
-//   "return_url": "http://localhost/Disaster-backend/public/attachmentPaymentMethod.php"
-// }
-
-// OR FOR CARD PAYMENT METHOD
-//{
-//   "payment_intent_id": "pi_k2acE85ovSoNzhRNXAdf5Gh8",
-//   "type": "card",
+//   "return_url": "https://yourfrontend.com/success",
 //   "details": {
 //     "card_number": "4343434343434345",
 //     "exp_month": 12,
-//     "exp_year": 2030,
+//     "exp_year": 29,
 //     "cvc": "123"
-//   },
-//   "name": "Jared Abrera",
-//   "email": "jared@example.com.ph",
-//   "return_url": "http://localhost/Disaster-backend/public/attachmentPaymentMethod.php"
+//   }
 // }
+
+
+
+// FOR GCASH PAYMENT PayMaya / GrabPay
+// {
+//   "name": "Jared Abrera",
+//   "email": "jared@example.com",
+//   "amount": 2000,
+//   "description": "Disaster Relief Donation",
+//   "type": "gcash",
+//   "return_url": "https://yourfrontend.com/success"
+// }
+
+
+
+
 
 
 
