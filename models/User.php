@@ -67,7 +67,31 @@ class User {
     $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM users");
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['total'] ?? 0;
-}
+
+    }
+
+    public function incrementLoginAttempts($username) {
+        $query = "UPDATE users SET login_attempts = login_attempts + 1, last_attempt_at = NOW() WHERE username = :username";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+    }
+
+    public function resetLoginAttempts($username) {
+        $query = "UPDATE users SET login_attempts = 0, last_attempt_at = NULL WHERE username = :username";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+    }
+
+    public function getUserAttempts($username) {
+        $query = "SELECT login_attempts, last_attempt_at FROM users WHERE username = :username";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 
 

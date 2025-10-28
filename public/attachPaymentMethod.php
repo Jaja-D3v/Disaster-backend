@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 // Get input
 $input = json_decode(file_get_contents("php://input"), true);
 
-// Validate required fields
+
 if (!isset($input["payment_intent_id"]) || !isset($input["type"])) {
     http_response_code(400);
     echo json_encode(["error" => "Missing payment_intent_id or type"]);
