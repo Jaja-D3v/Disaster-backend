@@ -127,4 +127,76 @@ Updated donation pay_zdTQrLntRr8nRbe54z5K4P53 with unknown
 2025-10-26 09:14:46 | Received event: payment.paid
 2025-10-26 09:14:46 | Updated donation pi_XMARu6t9iX6iEtyLX8nuarmB with gcash
 2025-10-26 09:27:16 | Raw payload: {"data":{"id":"evt_4oUNgzKevJ11XQjrq5umw7Hr","type":"event","attributes":{"type":"payment.failed","livemode":false,"data":{"id":"pay_Lw2XWKF5P8Fzs8wR7aRhzPYv","type":"payment","attributes":{"access_url":null,"amount":4000,"balance_transaction_id":null,"billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"hrlloeg@gmail.com","name":"kjfgsdjgfksdfkgjsdf","phone":null},"currency":"PHP","description":"ajsdfnasdfds","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"failed_code":"CLOSED","failed_message":"Payment checkout has expired.","fee":0,"instant_settlement":null,"livemode":false,"net_amount":0,"origin":"api","payment_intent_id":"pi_pXjc9TftW22uWA964qfLVyLz","payout":null,"source":{"id":"src_2yBdWWiMXTiMQ94GwTe7ESRc","type":"gcash","provider":{"id":null},"provider_id":null},"statement_descriptor":"DisasterReadyApp","status":"failed","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"created_at":1761467235,"credited_at":null,"paid_at":1761467235,"updated_at":1761467235}},"previous_data":{},"pending_webhooks":1,"created_at":1761467235,"updated_at":1761467235}}}
-2025-10-26 09:27:16 | Received event: payment.failed
+2025-10-26 09:27:16 | Received event: payment.failed2025-10-28 06:55:40 | Raw payload: {
+  "data": {
+    "id": "evt_test123",
+    "type": "event",
+    "attributes": {
+      "type": "payment.paid",
+      "data": {
+        "id": "pi_nc9t8qU6uUPLDHstZqM9oHfJ",
+        "attributes": {
+          "payments": [
+            {
+              "payment_method_type": "card",
+              "id": "pay_TEST12345"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+2025-10-28 06:55:40 | Received event: payment.paid
+2025-10-28 06:55:40 | Updated donation pi_nc9t8qU6uUPLDHstZqM9oHfJ with card
+2025-10-28 06:55:53 | Raw payload: {
+  "data": {
+    "id": "evt_test_456",
+    "type": "event",
+    "attributes": {
+      "type": "payment.failed",
+      "data": {
+        "id": "pay_test_456",
+        "type": "payment",
+        "attributes": {
+          "payment_intent_id": "pi_c3HEeHnneQNVQNciQhRvrgau",
+          "payments": [
+            {
+              "payment_method_type": "gcash"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+2025-10-28 06:55:53 | Received event: payment.failed
+2025-10-28 06:56:21 | Raw payload: {"data":{"id":"evt_boWXuJ7sHgZL7Qi3WBN9fha4","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_jkYEehSjq9RoPUeRCKt1qhjN","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_797WE1YRnUG8iPhofp63A29R","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_hqGqHHYsx1RZf1VHn8BMACxa","payout":null,"source":{"id":"card_XKacGEujnh1WY1pCAibU1wAS","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761629911,"credited_at":1762304400,"paid_at":1761629911,"updated_at":1761629911}},"previous_data":{},"pending_webhooks":1,"created_at":1761629911,"updated_at":1761629911}}}
+2025-10-28 06:56:21 | Received event: payment.paid
+2025-10-28 06:56:21 | Updated donation pi_hqGqHHYsx1RZf1VHn8BMACxa with card
+2025-10-28 06:56:52 | Raw payload: {"data":{"id":"evt_MpgbavfCLmnciho179yHsXwK","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_Uf5H4RKTbDGjowmKaPYdyAXb","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_mRieKdprxyJ8v38yvwpJDcvK","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_oGqXFEJsZXBjDonpdmLccgJo","payout":null,"source":{"id":"card_zAjDKL5CCHhQvR2wKA3rWf65","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761631010,"credited_at":1762304400,"paid_at":1761631010,"updated_at":1761631010}},"previous_data":{},"pending_webhooks":1,"created_at":1761631010,"updated_at":1761631010}}}
+2025-10-28 06:56:52 | Received event: payment.paid
+2025-10-28 06:56:52 | Updated donation pi_oGqXFEJsZXBjDonpdmLccgJo with card
+2025-10-28 06:57:13 | Raw payload: {"data":{"id":"evt_hhVtMbwjL8SWgCVVcUmUYB16","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_XnQCLdjKvLMJQbyDREAxaLDN","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_FTG86ye5xwsbtsako2CG9Ak5","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_pHzENvrCBtZuJf8zLUbhzTNU","payout":null,"source":{"id":"card_gEZkRbzxbFaLTJCTuHdevpuV","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761631031,"credited_at":1762304400,"paid_at":1761631031,"updated_at":1761631031}},"previous_data":{},"pending_webhooks":1,"created_at":1761631031,"updated_at":1761631031}}}
+2025-10-28 06:57:13 | Received event: payment.paid
+2025-10-28 06:57:13 | Updated donation pi_pHzENvrCBtZuJf8zLUbhzTNU with card
+2025-10-28 06:59:03 | Raw payload: {"data":{"id":"evt_B8gMPgfE8MxLsBWp83uDoKLm","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_FCAWwEH18UTQX6yxGujoYSQt","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_guLrBKWxAvcRgLhRWofvBUTp","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_fqtNbmU2CdEf3nFreJaoe3hm","payout":null,"source":{"id":"card_5CeWB2fCmTrNGsHJqLRZSJ3M","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761630578,"credited_at":1762304400,"paid_at":1761630578,"updated_at":1761630578}},"previous_data":{},"pending_webhooks":1,"created_at":1761630578,"updated_at":1761630578}}}
+2025-10-28 06:59:03 | Received event: payment.paid
+2025-10-28 06:59:03 | Updated donation pi_fqtNbmU2CdEf3nFreJaoe3hm with card
+2025-10-28 07:19:06 | Raw payload: {"data":{"id":"evt_nEaLxMkxj5UWcfKgUkMgKLsW","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_axTFhniURA3kNTZfEhVQvFCM","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_fCVZ79ZDeXdhTRKNgXv6ETh4","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_vHCT2xiM8VaCiBAZ1qUXXau8","payout":null,"source":{"id":"card_PtXJEWf5FJU9Sd9Prb4hFsmU","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761632345,"credited_at":1762304400,"paid_at":1761632345,"updated_at":1761632345}},"previous_data":{},"pending_webhooks":1,"created_at":1761632345,"updated_at":1761632345}}}
+2025-10-28 07:19:06 | Received event: payment.paid
+2025-10-28 07:19:06 | Updated donation pi_vHCT2xiM8VaCiBAZ1qUXXau8 with card
+2025-10-28 07:26:05 | Raw payload: {"data":{"id":"evt_JX1BiSp5LBPYRUC4mCmQRjbd","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_T6NGW3BAbyLV7QbNP26acg9w","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_588m5yzRrSfsHTMGRfhVJnQC","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_G8KiUXbFughvKDaNk3igZE4Y","payout":null,"source":{"id":"card_eFzUqiquRs2AjZpvR6T2MQQg","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761628616,"credited_at":1762304400,"paid_at":1761628616,"updated_at":1761628616}},"previous_data":{},"pending_webhooks":1,"created_at":1761628616,"updated_at":1761628616}}}
+2025-10-28 07:26:05 | Received event: payment.paid
+2025-10-28 07:26:05 | Updated donation pi_G8KiUXbFughvKDaNk3igZE4Y with card
+2025-10-28 07:29:20 | Raw payload: {"data":{"id":"evt_SXMo4Cj6xCCtmnSdfr4qTqKw","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_iifjZ8XofM8zfjvLqhdWSpLn","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_bjbwJdn6bHwqqUhAUm85AvNz","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_c3HEeHnneQNVQNciQhRvrgau","payout":null,"source":{"id":"card_dixK5vvg1dUY3eGstQpognG3","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761628784,"credited_at":1762304400,"paid_at":1761628784,"updated_at":1761628784}},"previous_data":{},"pending_webhooks":1,"created_at":1761628785,"updated_at":1761628785}}}
+2025-10-28 07:29:20 | Received event: payment.paid
+2025-10-28 07:29:20 | Updated donation pi_c3HEeHnneQNVQNciQhRvrgau with card
+2025-10-28 07:40:50 | Raw payload: {"data":{"id":"evt_rvDDZirfghm4xks82xxmGbmK","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_46D47rfpgPBkcyHSiLcHpWxM","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_SUtsTLS5SHun55fVvzdXhWvT","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Donation using card","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":1570,"foreign_fee":20,"instant_settlement":null,"livemode":false,"net_amount":410,"origin":"api","payment_intent_id":"pi_dTPyXuoYpyVgGtwpYWSLq4qC","payout":null,"source":{"id":"card_T1GoZhVqDftrBFw6HtKoKvHz","type":"card","brand":"visa","country":"US","last4":"4345"},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1762160400,"created_at":1761633648,"credited_at":1762304400,"paid_at":1761633648,"updated_at":1761633648}},"previous_data":{},"pending_webhooks":1,"created_at":1761633648,"updated_at":1761633648}}}
+2025-10-28 07:40:50 | Received event: payment.paid
+2025-10-28 07:40:50 | Updated donation pi_dTPyXuoYpyVgGtwpYWSLq4qC with card
+2025-10-28 07:42:05 | Raw payload: {"data":{"id":"evt_9U6x92rfh8XuCpsuF3dwDKLd","type":"event","attributes":{"type":"payment.paid","livemode":false,"data":{"id":"pay_vA25eqePnipqngaiBjDhcgHP","type":"payment","attributes":{"access_url":null,"amount":2000,"balance_transaction_id":"bal_txn_kLZqtCWPnKt2jiXwqrJD6Sju","billing":{"address":{"city":null,"country":null,"line1":null,"line2":null,"postal_code":null,"state":null},"email":"jared@example.com","name":"Jared Abrera","phone":null},"currency":"PHP","description":"Disaster Relief Donation","digital_withholding_vat_amount":0,"disputed":false,"external_reference_number":null,"fee":50,"instant_settlement":null,"livemode":false,"net_amount":1950,"origin":"api","payment_intent_id":"pi_cxt2Q9Grix4DnjPkFz9kZNdZ","payout":null,"source":{"id":"src_JGGpcK7xhQ6JhRDo3Y1UtKFy","type":"gcash","provider":{"id":null},"provider_id":null},"statement_descriptor":"DisasterReadyApp","status":"paid","tax_amount":null,"metadata":null,"promotion":null,"refunds":[],"taxes":[],"available_at":1761814800,"created_at":1761633723,"credited_at":1762304400,"paid_at":1761633723,"updated_at":1761633723}},"previous_data":{},"pending_webhooks":1,"created_at":1761633723,"updated_at":1761633723}}}
+2025-10-28 07:42:05 | Received event: payment.paid
+2025-10-28 07:42:05 | Updated donation pi_cxt2Q9Grix4DnjPkFz9kZNdZ with gcash
