@@ -414,7 +414,7 @@ CREATE TABLE pending_registrations (
     expires DATETIME
 );
 
-//new table for donations
+
 
 CREATE TABLE donations (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -428,5 +428,12 @@ CREATE TABLE donations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+//new table for donations
+
+ALTER TABLE users
+ADD COLUMN login_attempts INT DEFAULT 0,
+ADD COLUMN last_attempt_at DATETIME NULL;
 
 
