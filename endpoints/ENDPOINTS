@@ -9,9 +9,9 @@
 
 // http://localhost/disaster-backend/public/register.php
 
-// http://localhost/Disaster-backend/controllers/evacuationCenterController.php    // para sa post, fetch all ng evac
+// http://localhost/Disaster-backend/public/evacuationCenterController.php    // para sa post, fetch all ng evac
 
-// http://localhost/Disaster-backend/controllers/evacuationCenterController.php?&id=2 // fetch by id , delete, edit
+// http://localhost/Disaster-backend/public/evacuationCenterController.php?&id=2 // fetch by id , delete, edit
 
 
 
@@ -229,7 +229,7 @@
 
 //PARA SA USER MANAGEMENT - ACTIVATE AND DEACTIVATE USER ACCOUNTS WITH SUPER ADMIN VERIFICATION
 
-// http://localhost/Disaster-backend/controllers/userController.php? // POST
+// http://localhost/Disaster-backend/public/userController.php // POST
 
 // {
 //     "action": "deactivate",
