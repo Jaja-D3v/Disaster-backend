@@ -1,21 +1,14 @@
 <?php
 require_once "../config/db.php";
 require_once "../models/User.php";
-require_once "../vendor/autoload.php";
 
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
-
-$secret_key = "your_super_secret_key"; 
-$issuedAt = time();
-$expire = $issuedAt + (60 * 60); // 1 hour
+session_start(); // Start the session
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 date_default_timezone_set('Asia/Manila');
-
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo json_encode(["success" => false, "message" => "Only POST requests allowed."]);
@@ -35,7 +28,7 @@ $db = (new Database())->connect();
 $userModel = new User($db);
 $user = $userModel->findByUsername($username);
 
-// Check attempts before verifying password
+// Check login attempts
 $attemptData = $userModel->getUserAttempts($username);
 
 if ($attemptData) {
@@ -55,35 +48,29 @@ if ($attemptData) {
             ]);
             exit;
         } else {
-            // Reset after cooldown
             $userModel->resetLoginAttempts($username);
         }
     }
 }
 
 if ($user && password_verify($password, $user["password"])) {
-    // Reset attempts after successful login
+    // Reset failed attempts
     $userModel->resetLoginAttempts($username);
 
-    $payload = [
-        "iss" => "http://localhost", 
-        "iat" => $issuedAt,
-        "exp" => $expire,
-        "data" => [
-            "id" => $user["id"],
-            "username" => $user["username"],
-            "role" => $user["role"]
-        ]
-    ];
+    // Set session variables
+    $_SESSION['user_id'] = $user["id"];
+    $_SESSION['username'] = $user["username"];
+    $_SESSION['email'] = $user["email"];
+    $_SESSION['role'] = $user["role"];
+    $_SESSION['barangay'] = $user["barangay"];
+    $_SESSION['last_login'] = date("Y-m-d H:i:s");
 
     $userModel->updateLastLogin($user['id']); 
     $userModel->updateUserStatus($user['id'], 'active');
 
-    $jwt = JWT::encode($payload, $secret_key, 'HS256');
-
     echo json_encode([
         "success" => true,
-        "token" => $jwt,
+        "message" => "Login successful",
         "user" => [
             "id" => $user["id"],
             "username" => $user["username"],
