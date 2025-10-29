@@ -92,6 +92,120 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function deactivateUser($userId, $superAdminId, $superAdminPassword) {
+    // Verify Super Admin
+    $superAdmin = $this->findById($superAdminId);
+    if (!$superAdmin || $superAdmin['role'] != 1 || !password_verify($superAdminPassword, $superAdmin['password'])) {
+        return ["success"=>false,"message"=>"Invalid Super Admin credentials"];
+    }
+$user = $this->findById($userId);
+if (!$user) {
+    return ["success" => false, "message" => "User does not exist"];
+}
+if ($user['role'] == 1) {
+    return ["success" => false, "message" => "Cannot deactivate Super Admin"];
+}
+
+
+    
+    // Remove archived_at if exists to allow DB default
+    if (isset($user['archived_at'])) {
+        unset($user['archived_at']);
+    }
+
+       // Set status to deactivated before moving to archive
+    $user['status'] = 'deactivated';
+
+    // Copy to archived_users
+    $columns = implode(", ", array_keys($user));
+    $placeholders = ":" . implode(", :", array_keys($user));
+    $stmt = $this->pdo->prepare("INSERT INTO archived_users ($columns) VALUES ($placeholders)");
+    $stmt->execute($user);
+
+    // Delete from users
+    $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->execute([$userId]);
+
+    return ["success"=>true,"message"=>"User deactivated and moved to archive"];
+}
+
+
+
+public function activateUser($userId, $superAdminId, $superAdminPassword) {
+    // Verify Super Admin
+    $superAdmin = $this->findById($superAdminId);
+    if (!$superAdmin || $superAdmin['role'] != 1 || !password_verify($superAdminPassword, $superAdmin['password'])) {
+        return ["success" => false, "message" => "Invalid Super Admin credentials"];
+    }
+
+    // Fetch user from archived_users
+    $user = $this->findArchivedById($userId);
+    if (!$user) return ["success" => false, "message" => "Archived user not found"];
+
+    // Remove archived_at before inserting back
+    if (isset($user['archived_at'])) {
+        unset($user['archived_at']);
+    }
+
+    // Set status to active
+    $user['status'] = 'active';
+
+    // Begin transaction
+    $this->pdo->beginTransaction();
+    try {
+        // Prepare column names and placeholders
+        $columns = implode(", ", array_keys($user));
+        $placeholders = ":" . implode(", :", array_keys($user));
+
+        // Insert into users table
+        $stmt = $this->pdo->prepare("INSERT INTO users ($columns) VALUES ($placeholders)");
+        $stmt->execute($user);
+
+        // Delete from archive
+        $stmt = $this->pdo->prepare("DELETE FROM archived_users WHERE id = ?");
+        $stmt->execute([$userId]);
+
+        $this->pdo->commit();
+        return ["success" => true, "message" => "User activated successfully"];
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        return ["success" => false, "message" => "Error: " . $e->getMessage()];
+    }
+}
+
+
+
+public function findById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function findArchivedById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM archived_users WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+    // Fetch all users with optional filtering
+    public function getAllUsers() {
+        $stmt = $this->pdo->prepare("
+            SELECT id, username, email, role, status, barangay, last_logged_in, created_at, updated_at
+            FROM {$this->table}
+            ORDER BY created_at DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
+   
+
+
+
 
 
 
