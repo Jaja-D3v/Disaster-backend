@@ -169,16 +169,22 @@
 // http://localhost/Disaster-backend/public/barangayContact.php?id=1   // PUT (edit endpoint) - FOR UPDATE ENDPOINT
 
 // {
-//   "barangay_name": "San Jose Updated",
-//   "contact_number": "0999999999",
-//   "landline": "765-4321",
-//   "email": "update@ex.com",
-//   "facebook_page": "fb.com/brgysanupdated",
-//   "captain_name": "Pedro Dela Cruz",
-//   "secretary_name": "Maria Reyes",
-//   "lat": "14.58",
-//   "long": "121.04",
-//   "updated_by": 2
+//   "barangay_name": "Updated Barangay",
+//   "contact_number": "09171234567",
+//   "landline": "1234567",
+//   "email": "testuser@gmail.com",
+//   "facebook_page": "https://facebook.com/updatedbarangay",
+//   "captain_name": "Juan Dela Cruz",
+//   "secretary_name": "Maria Santos",
+//   "lat": 14.5995,
+//   "long": 120.9842,
+//   "total_male": 1500,
+//   "total_female": 1600,
+//   "total_families": 800,
+//   "total_male_senior": 200,
+//   "total_female_senior": 250,
+//   "total_0_4_years": 300,
+//   "source": "Barangay census 2025"
 // }
 
 
@@ -187,17 +193,25 @@
 // http://localhost/Disaster-backend/public/barangayContact.php // fetch all/POST
 // SAMPLE LANG ITO NG POST REQUEST
 // {
-//   "barangay_name": "San Jose",
+//   "barangay_name": "Barangay Test",
 //   "contact_number": "09123456789",
-//   "landline": "123-4567",
-//   "email": "brgy@ex.com",
-//   "facebook_page": "fb.com/brgysan",
+//   "landline": "1234567",
+//   "email": "student@ust.edu.ph",
+//   "facebook_page": "https://facebook.com/barangaytest",
 //   "captain_name": "Juan Dela Cruz",
-//   "secretary_name": "Ana Reyes",
-//   "lat": "14.57",
-//   "long": "121.03",
-//   "created_by": 1
+//   "secretary_name": "Maria Santos",
+//   "lat": 14.656,
+//   "long": 121.031,
+//   "total_male": 120,
+//   "total_female": 130,
+//   "total_families": 50,
+//   "total_male_senior": 20,
+//   "total_female_senior": 25,
+//   "total_0_4_years": 15,
+//   "source": "PSA Census 2020",
+//   "added_by": 12
 // }
+
 
 // http://localhost/Disaster-backend/public/barangayContact.php?id=1 // fetch by id  method = GET
 
