@@ -430,10 +430,45 @@ CREATE TABLE donations (
 
 
 
-//new table for donations
+
 
 ALTER TABLE users
 ADD COLUMN login_attempts INT DEFAULT 0,
 ADD COLUMN last_attempt_at DATETIME NULL;
+
+
+
+//NEW TABLES AND CONSTRAINTS
+
+
+
+ALTER TABLE barangay_contact_info
+ADD COLUMN created_by INT AFTER id;
+
+
+
+ALTER TABLE barangay_contact_info
+ADD CONSTRAINT fk_created_by
+FOREIGN KEY (created_by) REFERENCES users(id)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+
+
+ALTER TABLE barangay_contact_info
+ADD COLUMN created_by INT AFTER id,
+ADD COLUMN updated_by INT NULL AFTER created_by,
+ADD COLUMN updated_at DATETIME NULL AFTER created_at;
+
+
+ALTER TABLE barangay_contact_info
+ADD CONSTRAINT fk_created_by
+FOREIGN KEY (created_by) REFERENCES users(id)
+ON DELETE SET NULL
+ON UPDATE CASCADE,
+ADD CONSTRAINT fk_updated_by
+FOREIGN KEY (updated_by) REFERENCES users(id)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+
 
 

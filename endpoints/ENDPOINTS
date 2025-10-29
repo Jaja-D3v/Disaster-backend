@@ -11,25 +11,11 @@
 
 // http://localhost/Disaster-backend/controllers/evacuationCenterController.php    // para sa post, fetch all ng evac
 
-// http://localhost/Disaster-backend/controllers/evacuationCenterController.php?&id=2 // fetch by id , delete, edit 
+// http://localhost/Disaster-backend/controllers/evacuationCenterController.php?&id=2 // fetch by id , delete, edit
 
-// http://localhost/Disaster-backend/public/barangayContact.php?id=1   // PUT (edit endpoint)
 
-// http://localhost/Disaster-backend/public/barangayContact.php // fetch all/POST
-// SAMPLE LANG ITO NG POST REQUEST
-//{
-//   "barangay_name": "Barangay testing",
-//   "contact_number": "09123456789",
-//   "landline": "049-501-2233",
-//   "email": "barangayuno@gmail.com",
-//   "facebook_page": "fb.com/barangayuno",
-//   "captain_name": "Juan Dela Cruz",
-//   "secretary_name": "Maria Santos",
-//   "lat": "14.1698",
-//   "long": "121.2431"
-// } 
 
-// http://localhost/Disaster-backend/public/barangayContact.php?id=1 // fetch by id _method delete by id 
+
 
 // http://localhost/Disaster-backend/public/AccountSettings.php  //POST
 // {
@@ -174,7 +160,83 @@
 
 
 
+// ETO YUNG BAGONG UPDATE PARA SA BARANGGAY CONTACT INFO TABLE
 
+
+
+
+
+// http://localhost/Disaster-backend/public/barangayContact.php?id=1   // PUT (edit endpoint) - FOR UPDATE ENDPOINT
+
+// {
+//   "barangay_name": "San Jose Updated",
+//   "contact_number": "0999999999",
+//   "landline": "765-4321",
+//   "email": "update@ex.com",
+//   "facebook_page": "fb.com/brgysanupdated",
+//   "captain_name": "Pedro Dela Cruz",
+//   "secretary_name": "Maria Reyes",
+//   "lat": "14.58",
+//   "long": "121.04",
+//   "updated_by": 2
+// }
+
+
+
+
+// http://localhost/Disaster-backend/public/barangayContact.php // fetch all/POST
+// SAMPLE LANG ITO NG POST REQUEST
+// {
+//   "barangay_name": "San Jose",
+//   "contact_number": "09123456789",
+//   "landline": "123-4567",
+//   "email": "brgy@ex.com",
+//   "facebook_page": "fb.com/brgysan",
+//   "captain_name": "Juan Dela Cruz",
+//   "secretary_name": "Ana Reyes",
+//   "lat": "14.57",
+//   "long": "121.03",
+//   "created_by": 1
+// }
+
+// http://localhost/Disaster-backend/public/barangayContact.php?id=1 // fetch by id  method = GET
+
+
+
+
+
+// {
+//     "action": "activate",
+//     "target_user_id": 2
+// }
+// Or for deactivation with Super Admin verification:
+
+// json
+// Copy code
+// {
+//     "action": "deactivate",
+//     "target_user_id": 2,
+//     "super_admin_id": 1,
+//     "super_admin_password": "SuperAdminPassword123"
+// }
+
+
+
+
+
+
+
+
+//PARA SA USER MANAGEMENT - ACTIVATE AND DEACTIVATE USER ACCOUNTS WITH SUPER ADMIN VERIFICATION
+
+// http://localhost/Disaster-backend/controllers/userController.php? // POST
+
+// {
+//     "action": "deactivate",
+//     "target_user_id": 6,
+//    "super_admin_id": 20,
+//    "super_admin_password": "Password123"
+// }
 
 
     

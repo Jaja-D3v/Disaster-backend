@@ -17,6 +17,8 @@ $override = $_POST['_method'] ?? json_decode(file_get_contents("php://input"), t
 
 $db = new Database();
 $pdo = $db->connect();
+
+// ✅ Create instance of BarangayContact
 $barangayContact = new class($pdo) extends BarangayContact {
     public function callAdd($data) {
         return $this->add($data);
@@ -51,71 +53,80 @@ $barangayContact = new class($pdo) extends BarangayContact {
     }
 };
 
+// ✅ Handle requests
 switch (true) {
+
+    // 📘 GET all or single record
     case $method === 'GET':
         $id = $_GET['id'] ?? null;
         $result = $id ? $barangayContact->callGetById($id) : $barangayContact->callGetAll();
         echo json_encode($result);
         break;
 
- case $method === 'POST':
-    $data = json_decode(file_get_contents("php://input"), true);
+    // 🟢 POST – Add new barangay contact
+    case $method === 'POST':
+        $data = json_decode(file_get_contents("php://input"), true);
 
-  
         if ($barangayContact->checkExistingRecord($data['barangay_name'], $data['email'])) {
             echo json_encode(["error" => "Barangay name and email already exist in the system."]);
             exit();
         }
 
+        // Make sure we have created_by (e.g., from frontend or JWT)
+        if (empty($data['created_by'])) {
+            $data['created_by'] = null; // can change to logged user ID later
+        }
+
         $saved = $barangayContact->callAdd($data);
         echo json_encode($saved
-            ? ["success" => true, "message" => "Contact info added."]
-            : ["error" => "Failed to add."]);
+            ? ["success" => true, "message" => "Contact info added successfully."]
+            : ["error" => "Failed to add contact info."]);
         break;
-case $method === 'PUT':
-    
-    $input = file_get_contents("php://input");
-    $data = json_decode($input, true);
 
+    // 🟡 PUT – Update existing barangay contact
+    case $method === 'PUT':
+        $input = file_get_contents("php://input");
+        $data = json_decode($input, true);
 
-    if (!$data) {
-        $data = $_POST;
-    }
+        if (!$data) {
+            $data = $_POST;
+        }
 
-    $id = $_GET['id'] ?? null;
+        $id = $_GET['id'] ?? null;
 
-    
-    if (!$id || !is_numeric($id)) {
-        http_response_code(400);
-        echo json_encode(["error" => "Missing or invalid ID."]);
-        exit();
-    }
-
-
-    $required = ['barangay_name', 'email'];
-    foreach ($required as $field) {
-        if (empty($data[$field])) {
+        if (!$id || !is_numeric($id)) {
             http_response_code(400);
-            echo json_encode(["error" => "Field '$field' is required."]);
+            echo json_encode(["error" => "Missing or invalid ID."]);
             exit();
         }
-    }
 
+        $required = ['barangay_name', 'email'];
+        foreach ($required as $field) {
+            if (empty($data[$field])) {
+                http_response_code(400);
+                echo json_encode(["error" => "Field '$field' is required."]);
+                exit();
+            }
+        }
 
-    if ($barangayContact->checkExistingRecord($data['barangay_name'], $data['email'], $id)) {
-        echo json_encode(["error" => "Barangay name and email already exist in the system."]);
-        exit();
-    }
+        if ($barangayContact->checkExistingRecord($data['barangay_name'], $data['email'], $id)) {
+            echo json_encode(["error" => "Barangay name and email already exist in the system."]);
+            exit();
+        }
 
-    
-    $updated = $barangayContact->callUpdate($id, $data);
+        // If not provided, set updated_by to null (later can use logged user ID)
+        if (empty($data['updated_by'])) {
+            $data['updated_by'] = null;
+        }
 
-    echo json_encode($updated
-        ? ["success" => true, "message" => "Updated successfully."]
-        : ["error" => "Update failed."]);
-    break;
+        $updated = $barangayContact->callUpdate($id, $data);
 
+        echo json_encode($updated
+            ? ["success" => true, "message" => "Updated successfully."]
+            : ["error" => "Update failed."]);
+        break;
 
+    // 🔴 DELETE – Remove a record
     case $method === 'DELETE':
         $id = $_GET['id'] ?? null;
 
