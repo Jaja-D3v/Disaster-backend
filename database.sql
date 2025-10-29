@@ -443,11 +443,6 @@ ADD COLUMN last_attempt_at DATETIME NULL;
 
 
 ALTER TABLE barangay_contact_info
-ADD COLUMN created_by INT AFTER id;
-
-
-
-ALTER TABLE barangay_contact_info
 ADD CONSTRAINT fk_created_by
 FOREIGN KEY (created_by) REFERENCES users(id)
 ON DELETE SET NULL
@@ -455,7 +450,6 @@ ON UPDATE CASCADE;
 
 
 ALTER TABLE barangay_contact_info
-ADD COLUMN created_by INT AFTER id,
 ADD COLUMN updated_by INT NULL AFTER created_by,
 ADD COLUMN updated_at DATETIME NULL AFTER created_at;
 
@@ -471,4 +465,13 @@ ON DELETE SET NULL
 ON UPDATE CASCADE;
 
 
-
+ALTER TABLE barangay_contact_info
+ADD COLUMN total_population INT DEFAULT 0,
+ADD COLUMN total_male INT DEFAULT 0,
+ADD COLUMN total_female INT DEFAULT 0,
+ADD COLUMN total_families INT DEFAULT 0,
+ADD COLUMN total_male_senior INT DEFAULT 0,
+ADD COLUMN total_female_senior INT DEFAULT 0,
+ADD COLUMN total_0_4_years INT DEFAULT 0,
+ADD COLUMN source VARCHAR(255),
+ADD COLUMN last_updated DATE;
