@@ -219,23 +219,6 @@
 
 
 
-// {
-//     "action": "activate",
-//     "target_user_id": 2
-// }
-// Or for deactivation with Super Admin verification:
-
-// json
-// Copy code
-// {
-//     "action": "deactivate",
-//     "target_user_id": 2,
-//     "super_admin_id": 1,
-//     "super_admin_password": "SuperAdminPassword123"
-// }
-
-
-
 
 
 
