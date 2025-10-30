@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2025 at 02:29 AM
+-- Generation Time: Oct 29, 2025 at 11:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,13 +38,36 @@ CREATE TABLE `barangay_contact_info` (
   `secretary_name` varchar(100) DEFAULT NULL,
   `lat` decimal(10,7) DEFAULT NULL,
   `long` decimal(11,8) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `total_male` int(11) DEFAULT 0,
+  `total_female` int(11) DEFAULT 0,
+  `total_families` int(11) DEFAULT 0,
+  `total_male_senior` int(11) DEFAULT 0,
+  `total_female_senior` int(11) DEFAULT 0,
+  `total_0_4_years` int(11) DEFAULT 0,
+  `source` varchar(255) DEFAULT NULL,
+  `date_added` date DEFAULT curdate(),
+  `added_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `barangay_contact_info`
 --
 
+INSERT INTO `barangay_contact_info` (`id`, `barangay_name`, `contact_number`, `landline`, `email`, `facebook_page`, `captain_name`, `secretary_name`, `lat`, `long`, `created_at`, `total_male`, `total_female`, `total_families`, `total_male_senior`, `total_female_senior`, `total_0_4_years`, `source`, `date_added`, `added_by`) VALUES
+(1, 'Updated Barangay', '09171234567', '1234567', 'testuser@gmail.com', 'https://facebook.com/updatedbarangay', 'Juan Dela Cruz', 'Maria Santos', 14.5995000, 120.98420000, '2025-10-29 10:38:53', 1500, 1600, 800, 200, 250, 300, 'Barangay census 2025', '2025-10-29', NULL),
+(2, 'Barangay Mabini', '09181234567', '045-234-5678', 'mabini.brgy@gmail.com', 'https://facebook.com/brgymabini', 'Jose Ramirez', 'Ana Dizon', 15.4823450, 120.96321000, '2025-10-29 10:38:53', 0, 0, 0, 0, 0, 0, NULL, '2025-10-29', NULL),
+(3, 'Barangay Maligaya', '09281234567', '045-345-6789', 'maligaya.barangay@gmail.com', 'https://facebook.com/brgymaligaya', 'Pedro Reyes', 'Liza Cruz', 15.4753210, 120.95123400, '2025-10-29 10:38:53', 0, 0, 0, 0, 0, 0, NULL, '2025-10-29', NULL),
+(4, 'Barangay San Roque', '09391234567', '045-456-7890', 'sanroque.barangay@gmail.com', 'https://facebook.com/brgysanroque', 'Ricardo Gomez', 'Ella Mendoza', 15.4802100, 120.95987600, '2025-10-29 10:38:53', 0, 0, 0, 0, 0, 0, NULL, '2025-10-29', NULL),
+(5, 'Barangay Sto. Niño', '09491234567', '045-567-8901', 'stonino.barangay@gmail.com', 'https://facebook.com/brgystonino', 'Carlos Bautista', 'Joyce Lim', 15.4738900, 120.96214500, '2025-10-29 10:38:53', 0, 0, 0, 0, 0, 0, NULL, '2025-10-29', NULL),
+(15, 'Barangay Test', '09123456789', '1234567', 'test@barangay.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 11:45:45', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(16, 'Barangay Test', '09123456789', '1234567', 'test@gmail.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 11:49:52', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(17, 'Barangay Test', '09123456789', '1234567', 'test@askjda.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 11:52:07', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(18, 'Barangay Test', '09123456789', '1234567', 'phonetest@smart.com.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 12:03:14', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(19, 'Barangay Test', '09123456789', '1234567', 'testuser@gmail.com', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 12:03:34', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(20, 'Barangay Test', '09123456789', '1234567', 'testuser@deped.gov.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 12:03:51', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(21, 'Barangay Test', '09123456789', '1234567', 'student@ust.edu.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 12:04:16', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12),
+(22, 'Barangay Test', '09234563789', '1234567', 'teacher@ust.edu.ph', 'https://facebook.com/barangaytest', 'Juan Dela Cruz', 'Maria Santos', 14.6560000, 121.03100000, '2025-10-29 12:06:43', 120, 130, 50, 20, 25, 15, 'PSA Census 2020', '2025-10-29', 12);
 
 -- --------------------------------------------------------
 
@@ -61,10 +84,6 @@ CREATE TABLE `community_notice` (
   `added_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `community_notice`
---
-
 -- --------------------------------------------------------
 
 --
@@ -79,10 +98,6 @@ CREATE TABLE `disaster_mapping` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `disaster_mapping`
---
 
 -- --------------------------------------------------------
 
@@ -101,9 +116,31 @@ CREATE TABLE `disaster_update` (
   `added_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `disaster_update`
+-- Table structure for table `donations`
 --
+
+CREATE TABLE `donations` (
+  `id` int(11) NOT NULL,
+  `payment_intent_id` varchar(255) NOT NULL,
+  `donor_name` varchar(255) DEFAULT 'Anonymous Donor',
+  `donor_email` varchar(255) DEFAULT 'noemail@disasterready.app',
+  `amount` int(11) NOT NULL,
+  `currency` varchar(10) DEFAULT 'PHP',
+  `payment_method` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `donations`
+--
+
+INSERT INTO `donations` (`id`, `payment_intent_id`, `donor_name`, `donor_email`, `amount`, `currency`, `payment_method`, `status`, `created_at`) VALUES
+(1, 'pi_wt1Bx6BrPV8zvfvPpGFHtApq', 'Jared Abrera', 'jared@example.com', 2000, 'PHP', 'gcash', 'paid', '2025-10-29 13:09:39'),
+(2, 'pi_3vL6uNaxiMpNRwRgK76aMaQu', 'Jared Abrera', 'jared@example.com', 2000, 'PHP', NULL, 'pending', '2025-10-29 13:15:45');
 
 -- --------------------------------------------------------
 
@@ -126,9 +163,33 @@ CREATE TABLE `evacuation_center` (
   `created_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `evacuation_center`
+-- Table structure for table `incident_reports`
 --
+
+CREATE TABLE `incident_reports` (
+  `id` int(11) NOT NULL,
+  `reporter_name` varchar(100) DEFAULT NULL,
+  `reporter_contact` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `media` varchar(255) DEFAULT NULL,
+  `status` enum('Pending','Ongoing','Resolved') DEFAULT 'Pending',
+  `responded_by` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lat` decimal(10,8) DEFAULT NULL,
+  `lng` decimal(11,8) DEFAULT NULL,
+  `severity` enum('Critical','Moderate','Minor') DEFAULT 'Minor'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `incident_reports`
+--
+
+INSERT INTO `incident_reports` (`id`, `reporter_name`, `reporter_contact`, `description`, `media`, `status`, `responded_by`, `created_at`, `updated_at`, `lat`, `lng`, `severity`) VALUES
+(1, 'dsfsbdfsdfj', '639943910539', 'sdjfsdfsbdjfdsbfsjdf', 'asdbasjdmas', 'Ongoing', 'Jared Abrera', '2025-10-29 10:15:05', '2025-10-29 10:21:18', NULL, NULL, 'Minor');
 
 -- --------------------------------------------------------
 
@@ -155,9 +216,47 @@ CREATE TABLE `password_history` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `password_history`
+-- Table structure for table `password_request_logs`
 --
+
+CREATE TABLE `password_request_logs` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expires_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pending_registrations`
+--
+
+CREATE TABLE `pending_registrations` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `barangay` varchar(50) DEFAULT NULL,
+  `code` varchar(6) DEFAULT NULL,
+  `expires` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -173,10 +272,6 @@ CREATE TABLE `road_advisories` (
   `status` varchar(50) NOT NULL,
   `added_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `road_advisories`
---
 
 -- --------------------------------------------------------
 
@@ -194,12 +289,18 @@ CREATE TABLE `users` (
   `barangay` varchar(255) NOT NULL,
   `last_logged_in` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `login_attempts` int(11) DEFAULT 0,
+  `last_attempt_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `status`, `barangay`, `last_logged_in`, `created_at`, `updated_at`, `login_attempts`, `last_attempt_at`) VALUES
+(12, 'jared', 'jaredabrera48@gmail.com', '$2y$10$cCyVld4UxxLVfI798Ngts.YWpcPt7ag7DtsutRqqBIbqn7vAbeYDy', 1, 'active', 'Central', NULL, '2025-10-29 10:28:40', '2025-10-29 10:30:46', 0, NULL),
+(13, 'Neo', 'jaredabrera44@gmail.com', '$2y$10$D/GqW7q4W4bREw2cuNSQG.Y2yHwNWc7WmKwSLUcvrHS1EdV05F8CC', 2, 'active', 'Central', NULL, '2025-10-29 10:30:34', '2025-10-29 10:30:34', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -216,10 +317,6 @@ CREATE TABLE `weather_advisories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `weather_advisories`
---
-
---
 -- Indexes for dumped tables
 --
 
@@ -227,7 +324,8 @@ CREATE TABLE `weather_advisories` (
 -- Indexes for table `barangay_contact_info`
 --
 ALTER TABLE `barangay_contact_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_added_by` (`added_by`);
 
 --
 -- Indexes for table `community_notice`
@@ -249,9 +347,21 @@ ALTER TABLE `disaster_update`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `donations`
+--
+ALTER TABLE `donations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `evacuation_center`
 --
 ALTER TABLE `evacuation_center`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `incident_reports`
+--
+ALTER TABLE `incident_reports`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -266,6 +376,24 @@ ALTER TABLE `migrations`
 ALTER TABLE `password_history`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `password_request_logs`
+--
+ALTER TABLE `password_request_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pending_registrations`
+--
+ALTER TABLE `pending_registrations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `road_advisories`
@@ -294,7 +422,7 @@ ALTER TABLE `weather_advisories`
 -- AUTO_INCREMENT for table `barangay_contact_info`
 --
 ALTER TABLE `barangay_contact_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `community_notice`
@@ -315,10 +443,22 @@ ALTER TABLE `disaster_update`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `donations`
+--
+ALTER TABLE `donations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `evacuation_center`
 --
 ALTER TABLE `evacuation_center`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `incident_reports`
+--
+ALTER TABLE `incident_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -333,6 +473,24 @@ ALTER TABLE `password_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `password_request_logs`
+--
+ALTER TABLE `password_request_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pending_registrations`
+--
+ALTER TABLE `pending_registrations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `road_advisories`
 --
 ALTER TABLE `road_advisories`
@@ -342,7 +500,7 @@ ALTER TABLE `road_advisories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `weather_advisories`
@@ -353,6 +511,12 @@ ALTER TABLE `weather_advisories`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `barangay_contact_info`
+--
+ALTER TABLE `barangay_contact_info`
+  ADD CONSTRAINT `fk_added_by` FOREIGN KEY (`added_by`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `disaster_mapping`
@@ -372,106 +536,20 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
-CREATE TABLE password_resets (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
-  token VARCHAR(255) NOT NULL,
-  expires_at DATETIME NOT NULL
-);
 
-
-CREATE TABLE password_request_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ip_address VARCHAR(45) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
-
-CREATE TABLE incident_reports (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    reporter_name VARCHAR(100) NULL,
-    reporter_contact VARCHAR(20) NOT NULL,
-    description TEXT NOT NULL,
-    media VARCHAR(255) NULL,      -- store the uploaded photo path as string
-    status ENUM('Pending','Ongoing','Resolved') DEFAULT 'Pending',
-    responded_by VARCHAR(100) DEFAULT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-ALTER TABLE incident_reports ADD COLUMN lat DECIMAL(10,8) NULL, ADD COLUMN lng DECIMAL(11,8) NULL, ADD COLUMN severity ENUM('Critical', 'Moderate', 'Minor') DEFAULT 'Minor';
-
-
-
-CREATE TABLE pending_registrations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    email VARCHAR(100),
+CREATE TABLE archived_users (
+    id INT PRIMARY KEY,
+    username VARCHAR(255),
+    email VARCHAR(255),
     password VARCHAR(255),
-    barangay VARCHAR(50),
-    code VARCHAR(6),
-    expires DATETIME
+    role INT,
+    status VARCHAR(50),
+    barangay VARCHAR(255),
+    last_logged_in DATETIME,
+    created_at DATETIME,
+    updated_at DATETIME,
+    login_attempts INT,
+    last_attempt_at DATETIME,
+    archived_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
-CREATE TABLE donations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    payment_intent_id VARCHAR(255) NOT NULL,
-    donor_name VARCHAR(255) DEFAULT 'Anonymous Donor',
-    donor_email VARCHAR(255) DEFAULT 'noemail@disasterready.app',
-    amount INT NOT NULL,
-    currency VARCHAR(10) DEFAULT 'PHP',
-    payment_method VARCHAR(50),
-    status VARCHAR(50) DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-
-
-
-ALTER TABLE users
-ADD COLUMN login_attempts INT DEFAULT 0,
-ADD COLUMN last_attempt_at DATETIME NULL;
-
-
-
-//NEW TABLES AND CONSTRAINTS
-
-
-
-ALTER TABLE barangay_contact_info
-ADD CONSTRAINT fk_created_by
-FOREIGN KEY (created_by) REFERENCES users(id)
-ON DELETE SET NULL
-ON UPDATE CASCADE;
-
-
-ALTER TABLE barangay_contact_info
-ADD COLUMN updated_by INT NULL AFTER created_by,
-ADD COLUMN updated_at DATETIME NULL AFTER created_at;
-
-
-ALTER TABLE barangay_contact_info
-ADD CONSTRAINT fk_created_by
-FOREIGN KEY (created_by) REFERENCES users(id)
-ON DELETE SET NULL
-ON UPDATE CASCADE,
-ADD CONSTRAINT fk_updated_by
-FOREIGN KEY (updated_by) REFERENCES users(id)
-ON DELETE SET NULL
-ON UPDATE CASCADE;
-
-
-ALTER TABLE barangay_contact_info
-ADD COLUMN total_population INT DEFAULT 0,
-ADD COLUMN total_male INT DEFAULT 0,
-ADD COLUMN total_female INT DEFAULT 0,
-ADD COLUMN total_families INT DEFAULT 0,
-ADD COLUMN total_male_senior INT DEFAULT 0,
-ADD COLUMN total_female_senior INT DEFAULT 0,
-ADD COLUMN total_0_4_years INT DEFAULT 0,
-ADD COLUMN source VARCHAR(255),
-ADD COLUMN last_updated DATE;

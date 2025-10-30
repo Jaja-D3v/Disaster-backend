@@ -1,0 +1,172 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = '+08:00';
+
+CREATE DATABASE IF NOT EXISTS disaster_system;
+USE disaster_system;
+
+CREATE TABLE users (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  role TINYINT(4) NOT NULL DEFAULT 2,
+  status ENUM('active','inactive') NOT NULL DEFAULT 'active',
+  barangay VARCHAR(255) NOT NULL,
+  last_logged_in DATETIME DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  login_attempts INT DEFAULT 0,
+  last_attempt_at DATETIME NULL
+);
+
+CREATE TABLE barangay_contact_info (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  barangay_name VARCHAR(100) NOT NULL,
+  contact_number VARCHAR(20) DEFAULT NULL,
+  landline VARCHAR(20) DEFAULT NULL,
+  email VARCHAR(100) DEFAULT NULL,
+  facebook_page VARCHAR(255) DEFAULT NULL,
+  captain_name VARCHAR(100) DEFAULT NULL,
+  secretary_name VARCHAR(100) DEFAULT NULL,
+  lat DECIMAL(10,7) DEFAULT NULL,
+  `long` DECIMAL(11,8) DEFAULT NULL,
+  created_by INT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_by INT NULL,
+  updated_at DATETIME NULL,
+  total_population INT DEFAULT 0,
+  total_male INT DEFAULT 0,
+  total_female INT DEFAULT 0,
+  total_families INT DEFAULT 0,
+  total_male_senior INT DEFAULT 0,
+  total_female_senior INT DEFAULT 0,
+  total_0_4_years INT DEFAULT 0,
+  source VARCHAR(255),
+  last_updated DATE,
+  CONSTRAINT fk_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE community_notice (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  details TEXT NOT NULL,
+  date_time DATETIME NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  added_by VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE disaster_mapping (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(100) NOT NULL,
+  lat DECIMAL(10,8) NOT NULL,
+  lng DECIMAL(11,8) NOT NULL,
+  created_by INT(11) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_disaster_created_by FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+CREATE TABLE disaster_update (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  img_path VARCHAR(255) NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  details TEXT NOT NULL,
+  date_time DATETIME NOT NULL,
+  disaster_type VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  added_by VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE evacuation_center (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  capacity INT(11) NOT NULL DEFAULT 0,
+  current_evacuees INT(11) NOT NULL DEFAULT 0,
+  contact_person VARCHAR(100) DEFAULT NULL,
+  contact_number VARCHAR(20) DEFAULT NULL,
+  lat DECIMAL(10,8) DEFAULT NULL,
+  `long` DECIMAL(11,8) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_by VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE password_history (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT(11) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT password_history_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE road_advisories (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  details TEXT NOT NULL,
+  date_time DATETIME NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  added_by VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE weather_advisories (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  details TEXT NOT NULL,
+  date_time DATETIME NOT NULL,
+  added_by VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE password_resets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  token VARCHAR(255) NOT NULL,
+  expires_at DATETIME NOT NULL
+);
+
+CREATE TABLE password_request_logs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ip_address VARCHAR(45) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE incident_reports (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  reporter_name VARCHAR(100) NULL,
+  reporter_contact VARCHAR(20) NOT NULL,
+  description TEXT NOT NULL,
+  media VARCHAR(255) NULL,
+  status ENUM('Pending','Ongoing','Resolved') DEFAULT 'Pending',
+  responded_by VARCHAR(100) DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  lat DECIMAL(10,8) NULL,
+  lng DECIMAL(11,8) NULL,
+  severity ENUM('Critical', 'Moderate', 'Minor') DEFAULT 'Minor'
+);
+
+CREATE TABLE pending_registrations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50),
+  email VARCHAR(100),
+  password VARCHAR(255),
+  barangay VARCHAR(50),
+  code VARCHAR(6),
+  expires DATETIME
+);
+
+CREATE TABLE donations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  payment_intent_id VARCHAR(255) NOT NULL,
+  donor_name VARCHAR(255) DEFAULT 'Anonymous Donor',
+  donor_email VARCHAR(255) DEFAULT 'noemail@disasterready.app',
+  amount INT NOT NULL,
+  currency VARCHAR(10) DEFAULT 'PHP',
+  payment_method VARCHAR(50),
+  status VARCHAR(50) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMIT;
