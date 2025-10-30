@@ -199,6 +199,24 @@ public function findArchivedById($id) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+public function getAllArchivedUsers() {
+    $sql = "SELECT id, username, email, role, status, barangay, archived_at 
+            FROM archived_users 
+            ORDER BY archived_at DESC";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+
+    $archivedUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($archivedUsers)) {
+        return ["success" => false, "message" => "No archived users found"];
+    }
+
+    return ["success" => true, "data" => $archivedUsers];
+}
+
+
 
 
 

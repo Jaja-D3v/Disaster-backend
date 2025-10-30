@@ -273,4 +273,29 @@
 // ]
 
 
+
+// PARA SA FETCH USER
+
+// http://localhost/Disaster-backend/public/fetchUser.php    // GET method 
+
+// SAMPLE DATA RETURNED:
+
+
+// {
+//             "id": 12,
+//             "username": "jared",
+//             "email": "jaredabrera48@gmail.com",
+//             "role": 1,
+//             "status": "active",
+//             "barangay": "Central",
+//             "last_logged_in": null,
+//             "created_at": "2025-10-29 18:28:40",
+//             "updated_at": "2025-10-29 18:30:46"
+// }
+
+
+// PARA SA FETCH ARCHIVED USERS
+
+// http://localhost/Disaster-backend/public/fetchArchivedUser.php   // GET method
+
     
