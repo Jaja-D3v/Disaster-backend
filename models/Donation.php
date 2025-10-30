@@ -8,9 +8,6 @@ class Donation {
         $this->encryptionKey = base64_decode($encryptionKey); // decode base64 key
     }
 
-    /**
-     * Encrypt data using AES-256-CBC
-     */
     private function encrypt(string $data): string {
         $cipher = 'aes-256-cbc';
         $ivLength = openssl_cipher_iv_length($cipher); // 16 bytes
@@ -19,9 +16,6 @@ class Donation {
         return base64_encode($iv . $encrypted); // store IV + ciphertext together
     }
 
-    /**
-     * Decrypt data encrypted with encrypt()
-     */
     public function decrypt(string $data): string {
         $cipher = 'aes-256-cbc';
         $raw = base64_decode($data);
@@ -31,9 +25,6 @@ class Donation {
         return openssl_decrypt($encrypted, $cipher, $this->encryptionKey, OPENSSL_RAW_DATA, $iv);
     }
 
-    /**
-     * Insert a donation (encrypts sensitive data)
-     */
     public function create(string $paymentIntentId, string $name, string $email, int $amount, string $currency = "PHP", ?string $paymentMethod = null, string $status = "pending"): int {
         $stmt = $this->pdo->prepare("
             INSERT INTO donations (payment_intent_id, donor_name, donor_email, amount, currency, payment_method, status)
@@ -56,9 +47,6 @@ class Donation {
         return (int)$this->pdo->lastInsertId();
     }
 
-    /**
-     * Fetch a single donation by ID (decrypts donor info)
-     */
     public function getDonationById(int $id): ?array {
         $stmt = $this->pdo->prepare("SELECT * FROM donations WHERE id = :id");
         $stmt->execute([':id' => $id]);
@@ -72,9 +60,7 @@ class Donation {
         return $row;
     }
 
-    /**
-     * Fetch all donations (decrypts donor info)
-     */
+
     public function getAllDonations(): array {
         $stmt = $this->pdo->query("SELECT * FROM donations ORDER BY created_at DESC");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

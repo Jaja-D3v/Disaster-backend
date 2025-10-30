@@ -8,7 +8,6 @@ class BarangayContact {
         $this->pdo = $pdo;
     }
 
-    // ✅ Add new record with strong validation
     public function add($data) {
         $this->validateEmail($data['email']);
         $this->validateContactNumber($data['contact_number']);
@@ -51,7 +50,6 @@ class BarangayContact {
         ]);
     }
 
-    // ✅ Update existing record with strong validation
     public function update($id, $data) {
         $this->validateEmail($data['email']);
         $this->validateContactNumber($data['contact_number']);
@@ -99,26 +97,22 @@ class BarangayContact {
         ]);
     }
 
-    // ✅ Delete record
     public function delete($id) {
         $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    // ✅ Get all records
     public function getAll() {
         $stmt = $this->pdo->query("SELECT * FROM {$this->table}");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ✅ Get one record by ID
     public function getById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // ✅ Check for existing barangay/email combo
     protected function checkExisting($barangay_name, $email) {
         $sql = "SELECT COUNT(*) FROM {$this->table} 
                 WHERE barangay_name = :barangay_name AND email = :email";
@@ -130,7 +124,6 @@ class BarangayContact {
         return $stmt->fetchColumn() > 0;
     }
 
-    // ✅ Strong email validation
     protected function validateEmail($email) {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception("Invalid email format.");
@@ -141,14 +134,12 @@ class BarangayContact {
         }
     }
 
-    // ✅ Philippine mobile number validation
     protected function validateContactNumber($number) {
         if (!preg_match('/^09\d{9}$/', $number)) {
             throw new Exception("Invalid Philippine mobile number. Must be 11 digits starting with 09.");
         }
     }
 
-    // ✅ Landline validation (optional)
     protected function validateLandline($landline) {
         if (!empty($landline) && !preg_match('/^\d+$/', $landline)) {
             throw new Exception("Invalid landline number. Only digits allowed.");

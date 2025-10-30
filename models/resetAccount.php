@@ -32,7 +32,6 @@ class User {
         return $stmt->execute([$hashedPassword, $email]);
     }
 
-    // pag sucess yung reset, delete yung token
     public function deleteResetTokenByEmail($email) {
         $stmt = $this->conn->prepare("DELETE FROM password_resets WHERE email = ?");
         return $stmt->execute([$email]);
@@ -66,7 +65,7 @@ class User {
     }
 
     public function resetPasswordWithToken($token, $newPassword, $confirmPassword) {
-    // Validate token
+
     $stmt = $this->conn->prepare("SELECT * FROM password_resets WHERE token = ?");
     $stmt->execute([$token]);
     $reset = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -84,7 +83,6 @@ class User {
 
     $email = $reset['email'];
 
-    // Validate password match
     if ($newPassword !== $confirmPassword) {
         return ["success" => false, "message" => "Passwords do not match."];
     }

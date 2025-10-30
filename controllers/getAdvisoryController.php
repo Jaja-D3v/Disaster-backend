@@ -3,10 +3,6 @@
 require_once "../config/db.php";
 require_once "../models/Advisory.php"; 
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-
 $db = new Database();
 $pdo = $db->connect();
 

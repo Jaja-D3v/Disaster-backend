@@ -5,20 +5,16 @@ $db = new Database();
 $pdo = $db->connect();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Get raw POST payload
+
 $payload = file_get_contents('php://input');
 
-// Optional: log raw payload for debugging
 file_put_contents('webhook_log.txt', date('Y-m-d H:i:s') . " | Raw payload: " . $payload . PHP_EOL, FILE_APPEND);
 
-// Decode JSON
 $input = json_decode($payload, true);
 
-// Get event type
 $eventType = $input['data']['attributes']['type'] ?? '';
 file_put_contents('webhook_log.txt', date('Y-m-d H:i:s') . " | Received event: $eventType" . PHP_EOL, FILE_APPEND);
 
-// Only process relevant events
 if (in_array($eventType, ["payment.paid", "payment_intent.paid"])) {
 
     $paymentData = $input['data']['attributes']['data'] ?? null;
@@ -28,7 +24,7 @@ if (in_array($eventType, ["payment.paid", "payment_intent.paid"])) {
                            ?? $paymentData['id'] 
                            ?? null;
 
-        // Determine payment method safely
+        
         $paymentMethod = 'unknown';
         $payments = $paymentData['attributes']['payments'] ?? [];
         if (!empty($payments) && isset($payments[0]['payment_method_type'])) {
@@ -53,7 +49,6 @@ if (in_array($eventType, ["payment.paid", "payment_intent.paid"])) {
     }
 }
 
-// Respond 200 OK
 http_response_code(200);
 echo json_encode([
     "statusCode" => 200,

@@ -5,7 +5,7 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../models/incident.php';
 
-// Create database connection
+
 $db = new Database();
 $pdo = $db->connect();
 
@@ -23,7 +23,7 @@ if (!$reporter_contact || !$description) {
     exit;
 }
 
-// Handle file upload (single file)
+
 $media_path = null;
 if (!empty($_FILES['media']['name'])) {
     $uploadDir = __DIR__ . '/../uploads/incidentPhotos/';
@@ -35,7 +35,7 @@ if (!empty($_FILES['media']['name'])) {
     $targetFile = $uploadDir . $fileName;
 
     if (move_uploaded_file($_FILES['media']['tmp_name'], $targetFile)) {
-        // Save relative path to DB
+        
         $media_path = 'incidentPhotos/' . $fileName;
     } else {
         echo json_encode(['error' => 'Failed to upload file']);
@@ -43,7 +43,7 @@ if (!empty($_FILES['media']['name'])) {
     }
 }
 
-// Insert into DB
+
 $id = $incidentModel->createIncident($reporter_name, $reporter_contact, $description,$lat ,$lng, $severity, $media_path);
 
 if ($id) {

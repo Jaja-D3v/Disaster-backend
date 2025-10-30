@@ -2,11 +2,7 @@
 require_once "../config/db.php";
 require_once "../models/User.php";
 
-session_start(); // Start the session
-
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+session_start(); 
 
 date_default_timezone_set('Asia/Manila');
 
@@ -27,11 +23,11 @@ if ($username === "" || $password === "") {
 $db = (new Database())->connect();
 $userModel = new User($db);
 
-// Try to find the user in active users
+
 $user = $userModel->findByUsername($username);
 
 if (!$user) {
-    // If not found, check in archived users
+    
     $archivedUser = $userModel->findArchivedByUsername($username);
     if ($archivedUser) {
         echo json_encode([
@@ -48,7 +44,7 @@ if (!$user) {
     }
 }
 
-// Check login attempts
+
 $attemptData = $userModel->getUserAttempts($username);
 
 if ($attemptData) {
@@ -74,10 +70,9 @@ if ($attemptData) {
 }
 
 if ($user && password_verify($password, $user["password"])) {
-    // Reset failed attempts
+
     $userModel->resetLoginAttempts($username);
 
-    // Set session variables
     $_SESSION['user_id'] = $user["id"];
     $_SESSION['username'] = $user["username"];
     $_SESSION['email'] = $user["email"];
@@ -100,7 +95,7 @@ if ($user && password_verify($password, $user["password"])) {
         ]
     ]);
 } else {
-    // Increase failed attempt count
+  
     $userModel->incrementLoginAttempts($username);
     echo json_encode(["success" => false, "message" => "Invalid username or password."]);
 }

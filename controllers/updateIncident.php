@@ -17,7 +17,7 @@ if (!$id || !$status) {
     exit;
 }
 
-// Fetch reporter contact before updating
+
 $stmt = $pdo->prepare("SELECT reporter_contact FROM incident_reports WHERE id = ?");
 $stmt->execute([$id]);
 $incident = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,11 +29,11 @@ if (!$incident) {
 
 $reporter_contact = $incident['reporter_contact'];
 
-// Update incident
+
 $success = $incidentModel->updateIncident($id, $status, $responded_by);
 
 if ($success && strtolower($status) === 'ongoing') {
-    // ✅ Send SMS notification only when status = "ongoing"
+    
 
     $username = "jarejare5kcux2025";  
     $password = "eTeDRLyd"; 

@@ -2,7 +2,6 @@
 require_once "../config/db.php";
 require_once "../models/DisasterMapping.php";
 
-header("Content-Type: application/json");
 
 
 $database = new Database();
