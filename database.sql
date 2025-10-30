@@ -553,3 +553,34 @@ CREATE TABLE archived_users (
     archived_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+//NEW TABLES FOR RELIEF PACKS MANAGEMENT  
+
+
+CREATE TABLE relief_packs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255) NOT NULL,
+    total_packs INT NOT NULL,
+    date_input DATE NOT NULL,
+    allocated TINYINT(1) DEFAULT 0, -- 0 = not distributed, 1 = distributed
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE relief_pack_barangays (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    relief_pack_id INT NOT NULL,
+    barangay_id INT NOT NULL,
+    allocated_packs INT NOT NULL,
+    FOREIGN KEY (relief_pack_id) REFERENCES relief_packs(id),
+    FOREIGN KEY (barangay_id) REFERENCES barangay_contact_info(id)
+);
+
+
+ALTER TABLE relief_pack_barangays
+DROP FOREIGN KEY relief_pack_barangays_ibfk_1;
+ALTER TABLE relief_pack_barangays
+ADD CONSTRAINT relief_pack_barangays_ibfk_1
+FOREIGN KEY (relief_pack_id) REFERENCES relief_packs(id)
+ON DELETE CASCADE;
