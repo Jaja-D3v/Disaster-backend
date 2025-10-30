@@ -253,4 +253,24 @@
 // }
 
 
+
+
+//  PARA MAKUHA YUNG DATA NG DONATIONS
+// http://localhost/Disaster-backend/controllers/getDonations.php
+
+// [
+//     {
+//         "id": 12,
+//         "payment_intent_id": "pi_5Eg8ahY236fmHRrHnM6dQMAk",
+//         "donor_name": "Jared Abrera",
+//         "donor_email": "jared@example.com",
+//         "amount": 2000,
+//         "currency": "PHP",
+//         "payment_method": "gcash",
+//         "status": "pending",
+//         "created_at": "2025-10-30 09:46:08"
+//     }
+// ]
+
+
     
