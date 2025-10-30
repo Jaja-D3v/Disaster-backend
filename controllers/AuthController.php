@@ -26,7 +26,27 @@ if ($username === "" || $password === "") {
 
 $db = (new Database())->connect();
 $userModel = new User($db);
+
+// Try to find the user in active users
 $user = $userModel->findByUsername($username);
+
+if (!$user) {
+    // If not found, check in archived users
+    $archivedUser = $userModel->findArchivedByUsername($username);
+    if ($archivedUser) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Your account is currently deactivated. Please reach out to the administrator to restore access."
+        ]);
+        exit;
+    } else {
+        echo json_encode([
+            "success" => false,
+            "message" => "Invalid username or password."
+        ]);
+        exit;
+    }
+}
 
 // Check login attempts
 $attemptData = $userModel->getUserAttempts($username);

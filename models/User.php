@@ -216,6 +216,13 @@ public function getAllArchivedUsers() {
     return ["success" => true, "data" => $archivedUsers];
 }
 
+public function findArchivedByUsername($username) {
+    $stmt = $this->pdo->prepare("SELECT * FROM archived_users WHERE username = :username LIMIT 1");
+    $stmt->execute(['username' => $username]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 
 
 
