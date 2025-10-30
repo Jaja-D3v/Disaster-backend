@@ -1,26 +1,41 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php'; // Load Composer autoload
+
+use Dotenv\Dotenv;
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-
+// Load .env file
+$dotenv = Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
 
 class Database {
-    private $host = "localhost";
-    private $dbname = "disaster_system";
-    private $username = "root";
-    private $password = "";
+    private $host;
+    private $dbname;
+    private $username;
+    private $password;
     public $pdo;
 
-  public function connect() {
+    public function __construct() {
+        $this->host = $_ENV['DB_HOST'];
+        $this->dbname = $_ENV['DB_NAME'];
+        $this->username = $_ENV['DB_USER'];
+        $this->password = $_ENV['DB_PASS'];
+    }
+
+    public function connect() {
         $this->pdo = null;
 
         try {
-            $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", 
-                                  $this->username, $this->password);
+            $this->pdo = new PDO(
+                "mysql:host={$this->host};dbname={$this->dbname}", 
+                $this->username, 
+                $this->password
+            );
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
-            echo "pdoection error: " . $e->getMessage();
+            echo "Connection error: " . $e->getMessage();
         }
 
         return $this->pdo;

@@ -2,8 +2,7 @@
 require_once "../config/db.php";
 require_once "../models/Advisory.php";
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+
 
 $method = $_SERVER['REQUEST_METHOD'];
 $override = $_POST['_method'] ?? json_decode(file_get_contents("php://input"), true)['_method'] ?? null;

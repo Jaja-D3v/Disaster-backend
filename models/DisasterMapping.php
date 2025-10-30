@@ -7,7 +7,6 @@ class Location {
         $this->pdo = $pdo;
     }
 
-    
     public function addLocation($data) {
         $stmt = $this->pdo->prepare("INSERT INTO {$this->table} (type, lat, lng, created_by) VALUES (?, ?, ?, ?)");
         return $stmt->execute([
@@ -23,7 +22,6 @@ class Location {
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
     }
-
     
     public function deleteLocation($id) {
         $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");

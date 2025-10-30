@@ -18,7 +18,7 @@ $override = $_POST['_method'] ?? json_decode(file_get_contents("php://input"), t
 $db = new Database();
 $pdo = $db->connect();
 
-// ✅ Create instance of BarangayContact
+
 $barangayContact = new class($pdo) extends BarangayContact {
     public function callAdd($data) {
         return $this->add($data);
@@ -53,17 +53,17 @@ $barangayContact = new class($pdo) extends BarangayContact {
     }
 };
 
-// ✅ Handle requests
+
 switch (true) {
 
-    // 📘 GET all or single record
+    
     case $method === 'GET':
         $id = $_GET['id'] ?? null;
         $result = $id ? $barangayContact->callGetById($id) : $barangayContact->callGetAll();
         echo json_encode($result);
         break;
 
-    // 🟢 POST – Add new barangay contact
+    
     case $method === 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
 
@@ -81,12 +81,12 @@ switch (true) {
             ? ["success" => true, "message" => "Contact info added successfully."]
             : ["error" => "Failed to add contact info."]);
     } catch (Exception $e) {
-        // Return validation error as JSON
+        
         echo json_encode(["error" => $e->getMessage()]);
     }
     break;
 
-// 🟡 PUT – Update existing barangay contact
+
 case $method === 'PUT':
     $input = file_get_contents("php://input");
     $data = json_decode($input, true);
@@ -110,7 +110,7 @@ case $method === 'PUT':
     }
     break;
 
-    // 🔴 DELETE – Remove a record
+    
     case $method === 'DELETE':
         $id = $_GET['id'] ?? null;
 

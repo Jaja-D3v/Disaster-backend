@@ -19,20 +19,20 @@ if (!$pending) {
     exit;
 }
 
-// Verify expiry first
+
 if (strtotime($pending['expires']) < time()) {
     $userModel->deletePending($pending['id']);
     echo json_encode(["success" => false, "message" => "Verification code expired. Please register again."]);
     exit;
 }
 
-// Verify code
+
 if ($pending['code'] !== $codeInput) {
     // Increment attempts
     $stmt = $db->prepare("UPDATE pending_registrations SET attempts = attempts + 1 WHERE id = ?");
     $stmt->execute([$pending['id']]);
 
-    $currentAttempts = $pending['attempts'] + 1; // new attempt count
+    $currentAttempts = $pending['attempts'] + 1; 
 
     if ($currentAttempts >= 4) {
         // Cancel registration after 4 failed attempts
@@ -45,16 +45,16 @@ if ($pending['code'] !== $codeInput) {
     exit;
 }
 
-// Create user
+
 $created = $userModel->createUser(
     $pending['username'],
     $pending['email'],
     $pending['password'],
-    2, // role
+    2, 
     $pending['barangay']
 );
 
-// Delete pending registration after successful creation
+
 $userModel->deletePending($pending['id']);
 
 if ($created) {

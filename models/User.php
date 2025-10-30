@@ -147,21 +147,17 @@ public function activateUser($userId, $superAdminId, $superAdminPassword) {
         unset($user['archived_at']);
     }
 
-    // Set status to active
+
     $user['status'] = 'active';
 
-    // Begin transaction
     $this->pdo->beginTransaction();
     try {
-        // Prepare column names and placeholders
         $columns = implode(", ", array_keys($user));
         $placeholders = ":" . implode(", :", array_keys($user));
 
-        // Insert into users table
         $stmt = $this->pdo->prepare("INSERT INTO users ($columns) VALUES ($placeholders)");
         $stmt->execute($user);
 
-        // Delete from archive
         $stmt = $this->pdo->prepare("DELETE FROM archived_users WHERE id = ?");
         $stmt->execute([$userId]);
 
@@ -187,8 +183,6 @@ public function findArchivedById($id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
-    // Fetch all users with optional filtering
     public function getAllUsers() {
         $stmt = $this->pdo->prepare("
             SELECT id, username, email, role, status, barangay, last_logged_in, created_at, updated_at

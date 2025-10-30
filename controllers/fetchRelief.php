@@ -10,7 +10,7 @@ try {
 
     $reliefPackModel = new ReliefPack($pdo);
 
-    // Fetch available relief packs
+    
     $relief_packs = $reliefPackModel->fetchAll();
 
     echo json_encode([

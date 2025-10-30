@@ -7,9 +7,6 @@ class Advisory {
         $this->pdo = $pdo;
     }
 
-    // ---------------------------
-    // CREATE ADVISORIES
-    // ---------------------------
 
     public function createWeather($data) {
         $stmt = $this->pdo->prepare("INSERT INTO weather_advisories (title, details, date_time, added_by) VALUES (?, ?, ?, ?)");
@@ -30,11 +27,6 @@ class Advisory {
         $stmt = $this->pdo->prepare("INSERT INTO community_notice (title, details, date_time, added_by) VALUES (?, ?, ?, ?)");
         return $stmt->execute([$data['title'], $data['details'], $data['dateTime'], $data['added_by']]);
     }
-
-
-    // ---------------------------
-    // UPDATE ADVISORIES
-    // ---------------------------
 
     public function updateWeather($id, $data) {
         $stmt = $this->pdo->prepare("UPDATE weather_advisories SET title = ?, details = ?, date_time = ?, added_by = ? WHERE id = ?");
@@ -59,11 +51,6 @@ class Advisory {
         $stmt->execute([$data['title'], $data['details'], $data['dateTime'], $data['added_by'], $id]);
         return $stmt->rowCount() > 0;
     }
-
-
-    // ---------------------------
-    // DELETE ADVISORIES
-    // ---------------------------
 
     public function deleteWeather($id) {
         $stmt = $this->pdo->prepare("DELETE FROM weather_advisories WHERE id = ?");
@@ -97,10 +84,6 @@ class Advisory {
     }
 
 
-    // ---------------------------
-    // FIND ADVISORY BY ID
-    // ---------------------------
-
     public function findWeatherById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM weather_advisories WHERE id = ?");
         $stmt->execute([$id]);
@@ -132,10 +115,6 @@ class Advisory {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
-    // ---------------------------
-    // GET ALL ADVISORIES
-    // ---------------------------
 
     public function getAll($table) {
         $stmt = $this->pdo->prepare("SELECT * FROM $table ORDER BY id DESC");

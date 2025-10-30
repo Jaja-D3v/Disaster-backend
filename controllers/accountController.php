@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// Create database connection
 $database = new Database();
 $pdo = $database->connect();
 

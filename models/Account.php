@@ -18,11 +18,9 @@ class Account {
             return ["success" => false, "message" => "User not found."];
         }
 
-        
         if (!password_verify($password, $user['password'])) {
             return ["success" => false, "message" => "Password is incorrect."];
         }
-
        
         $stmt = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE email = ? AND id != ?");
         $stmt->execute([$email, $id]);

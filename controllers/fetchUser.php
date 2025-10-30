@@ -2,18 +2,13 @@
 require_once "../config/db.php";
 require_once "../models/User.php";
 
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 $db = new Database();
 $pdo = $db->connect();
 $userModel = new User($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $users = $userModel->getAllUsers(); // excludes passwords
+        $users = $userModel->getAllUsers(); 
         echo json_encode([
             "success" => true,
             "data" => $users
