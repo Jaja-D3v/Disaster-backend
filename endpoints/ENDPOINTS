@@ -299,3 +299,39 @@
 // http://localhost/Disaster-backend/public/fetchArchivedUser.php   // GET method
 
     
+
+
+
+// SAMPLE DATA TO BE SEND IN BACKEND FOR RELIEF PACK ALLOCATION
+// http://localhost/Disaster-backend/public/reliefDistribution.php  POST
+
+// {
+//   "relief_pack_id": 8,
+//   "selected_barangays": [1, 2, 3, 4],
+//   "allocation_mode": "automatic",
+//   "based_on": "population/families"
+// }
+
+// {
+//   "relief_pack_id": 9,
+//   "selected_barangays": [1, 2, 3, 4],
+//   "allocation_mode": "manual",
+//   "manual_allocations": {
+//     "1": 20,
+//     "2": 30,
+//     "3": 25,
+//     "4": 25
+//   }
+// }
+
+
+
+// SAMPLE DATA TO CREATE RELIEF PACK
+// {
+//     "description": "Food Relief Pack - October 2025",
+//     "total_packs": 200,
+//     "date_input": "2025-10-31"
+// }
+
+
+// http://localhost/Disaster-backend/public/fetchRelief.php // fetch all relief packs GET method
