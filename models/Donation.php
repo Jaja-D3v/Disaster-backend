@@ -5,15 +5,15 @@ class Donation {
 
     public function __construct(PDO $pdo, string $encryptionKey) {
         $this->pdo = $pdo;
-        $this->encryptionKey = base64_decode($encryptionKey); // decode base64 key
+        $this->encryptionKey = base64_decode($encryptionKey); 
     }
 
     private function encrypt(string $data): string {
         $cipher = 'aes-256-cbc';
-        $ivLength = openssl_cipher_iv_length($cipher); // 16 bytes
-        $iv = openssl_random_pseudo_bytes($ivLength);  // generate secure IV
+        $ivLength = openssl_cipher_iv_length($cipher); 
+        $iv = openssl_random_pseudo_bytes($ivLength);  
         $encrypted = openssl_encrypt($data, $cipher, $this->encryptionKey, OPENSSL_RAW_DATA, $iv);
-        return base64_encode($iv . $encrypted); // store IV + ciphertext together
+        return base64_encode($iv . $encrypted); 
     }
 
     public function decrypt(string $data): string {
