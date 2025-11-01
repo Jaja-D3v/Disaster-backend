@@ -1,8 +1,7 @@
 <?php
 require_once "../config/db.php";
 require_once "../models/Advisory.php";
-
-
+require_once "../helpers/advisoryHelpers.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 $override = $_POST['_method'] ?? json_decode(file_get_contents("php://input"), true)['_method'] ?? null;
@@ -21,8 +20,9 @@ if ($method === 'POST' && $override === 'DELETE') {
     $pdo = $db->connect();
     $advisory = new Advisory($pdo);
 
-
     $exists = false;
+    $deleted = false;
+
     switch ($type) {
         case 'weather':
             $exists = $advisory->findWeatherById($id);
@@ -34,7 +34,10 @@ if ($method === 'POST' && $override === 'DELETE') {
             break;
         case 'disaster':
             $exists = $advisory->findDisasterById($id);
-            if ($exists) $deleted = $advisory->deleteDisaster($id);
+            if ($exists) {
+                if (isset($exists['img_path'])) deleteDisasterImage($exists['img_path']);
+                $deleted = $advisory->deleteDisaster($id);
+            }
             break;
         case 'community':
             $exists = $advisory->findCommunityById($id);

@@ -111,7 +111,6 @@ public function distribute($relief_pack_id, $selected_barangays, $allocation_mod
 }
 
 
-    // Fetch all relief packs
     public function fetchAll() {
         $stmt = $this->pdo->query("SELECT * FROM relief_packs ORDER BY date_input DESC, id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

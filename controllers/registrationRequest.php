@@ -42,7 +42,12 @@ if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d_+!@#$%^&*()-=]{8,}$/', $passw
 $db = (new Database())->connect();
 $userModel = new User($db);
 
-
+$userModel->cleanExpiredPendingRegistrations();
+$checkPending = $userModel->checkPendingEmail($email);
+if ($checkPending['exists']) {
+    echo json_encode(["success" => false, "message" => $checkPending['message']]);
+    exit;
+}
 $totalAccounts = $userModel->countUsers();
 if ($totalAccounts >= 25) {
     echo json_encode(["success" => false, "message" => "Maximum number of accounts (25) reached."]);

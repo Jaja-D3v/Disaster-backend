@@ -6,7 +6,7 @@ use Dotenv\Dotenv;
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Load .env file
+
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 

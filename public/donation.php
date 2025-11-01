@@ -20,9 +20,10 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $PAYMONGO_SECRET = $_ENV['PAYMONGO_SECRET_KEY'] ?? null;
-$ENCRYPTION_KEY   = $_ENV['ENCRYPTION_KEY'] ?? null;
+$ENCRYPTION_KEY  = $_ENV['ENCRYPTION_KEY'] ?? null;
+$RECAPTCHA_SECRET = $_ENV['RECAPTCHA_SECRET'] ?? null; 
 
-if (!$PAYMONGO_SECRET || !$ENCRYPTION_KEY) {
+if (!$PAYMONGO_SECRET || !$ENCRYPTION_KEY || !$RECAPTCHA_SECRET) {
     http_response_code(500);
     echo json_encode(["error" => "Environment variables not loaded properly."]);
     exit;
@@ -34,7 +35,27 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+
 $input = json_decode(file_get_contents("php://input"), true);
+$captchaToken = $input["g-recaptcha-response"] ?? null;
+
+if (!$captchaToken) {
+    http_response_code(400);
+    echo json_encode(["error" => "Missing reCAPTCHA token"]);
+    exit;
+}
+
+$verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+$verifyResponse = file_get_contents($verifyUrl . "?secret=" . urlencode($RECAPTCHA_SECRET) . "&response=" . urlencode($captchaToken));
+$captchaResult = json_decode($verifyResponse, true);
+
+if (!$captchaResult["success"]) {
+    http_response_code(400);
+    echo json_encode(["error" => "Captcha verification failed"]);
+    exit;
+}
+// ✅ end of reCAPTCHA verification
+
 $requiredFields = ["amount", "description", "type", "name", "email"];
 foreach ($requiredFields as $field) {
     if (empty($input[$field])) {

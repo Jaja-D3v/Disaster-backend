@@ -9,9 +9,9 @@
 
 // http://localhost/disaster-backend/public/register.php
 
-// http://localhost/Disaster-backend/public/evacuationCenterController.php    // para sa post, fetch all ng evac
+// http://localhost/Disaster-backend/public/evacuationCenter.php    // para sa post, fetch all ng evac
 
-// http://localhost/Disaster-backend/public/evacuationCenterController.php?&id=2 // fetch by id , delete, edit
+// http://localhost/Disaster-backend/public/evacuationCenter.php?&id=2 // fetch by id , delete, edit
 
 
 
@@ -115,6 +115,38 @@
 
 
 //http://localhost/Disaster-backend/public/donationController.php POST
+// "use client";
+// import { useState } from "react";
+// import ReCAPTCHA from "react-google-recaptcha";
+// import axios from "axios";
+
+
+// export default function DonationForm() {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     amount: "",
+//     description: "",
+//     type: "gcash",
+//   });
+//   const [loading, setLoading] = useState(false);
+//   const [message, setMessage] = useState("");
+//   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+//   let recaptchaRef;
+
+
+
+//    const response = await axios.post(
+//         "http://localhost/Disaster-backend/public/donation.php",
+//         {
+//           ...formData,
+//           "g-recaptcha-response": token, // ✅ send the token to backend
+//         },
+//         {
+//           headers: { "Content-Type": "application/json" },
+//         }
+//       );
 
 
 // FOR CARD PAYMENT
