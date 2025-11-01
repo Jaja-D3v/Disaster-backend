@@ -1,13 +1,11 @@
 <?php
-
 require_once "../config/db.php";
-require_once "../models/Advisory.php"; 
+require_once "../models/Advisory.php";
+require_once "../helpers/advisoryHelpers.php";
 
 $db = new Database();
 $pdo = $db->connect();
-
-
-$advisory = new Advisory($pdo); 
+$advisory = new Advisory($pdo);
 
 $type = $_GET['type'] ?? '';
 $id = $_GET['id'] ?? null;
@@ -25,11 +23,10 @@ if (!isset($tableMap[$type])) {
     exit;
 }
 
-$table = $tableMap[$type]; 
+$table = $tableMap[$type];
 
 try {
     if ($id) {
-      
         switch ($type) {
             case 'weather':
                 $result = $advisory->findWeatherById($id);
@@ -39,14 +36,19 @@ try {
                 break;
             case 'disaster':
                 $result = $advisory->findDisasterById($id);
+                $result = addBaseUrl($result);
                 break;
             case 'community':
                 $result = $advisory->findCommunityById($id);
                 break;
         }
     } else {
-   
         $result = $advisory->getAll($table);
+        if ($type === 'disaster') {
+            foreach ($result as &$row) {
+                $row = addBaseUrl($row);
+            }
+        }
     }
 
     echo json_encode($result ?: ["message" => "No records found."]);

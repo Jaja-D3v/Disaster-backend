@@ -74,7 +74,6 @@ class User {
         return ["success" => false, "message" => "Invalid or expired token."];
     }
 
-    // Check expiry
     $currentTime = date("Y-m-d H:i:s");
     if ($currentTime > $reset['expires_at']) {
         $this->deleteResetTokenByToken($token);

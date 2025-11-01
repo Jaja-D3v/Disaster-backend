@@ -1,0 +1,12 @@
+MGA NABAGO 
+
+
+POST NG DATA SA ADVISORY
+http://localhost/Disaster-backend/public/postAdvisory.php?type=road
+{
+  "title": "Road Closure Alert",
+  "details": "Main street closed due to flooding.",
+  "dateTime": "2025-11-01 10:00:00",
+  "status": "hsdbfjdsf",
+  "added_by": 1 -> hindi na neto kailangan provided na ng backend sa lahat type ng advisory
+}

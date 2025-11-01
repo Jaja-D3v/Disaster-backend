@@ -13,7 +13,7 @@ try {
 
     $pdo->beginTransaction();
 
-    // 1️⃣ Insert new relief pack
+    
     if (isset($input['description'], $input['total_packs'], $input['date_input'])) {
         $relief_pack_id = $reliefPackModel->insert(
             $input['description'],
@@ -30,7 +30,7 @@ try {
         exit;
     }
 
-    // 2️⃣ Distribute existing relief pack
+    
     if (!isset($input['relief_pack_id'], $input['selected_barangays'], $input['allocation_mode'])) {
         throw new Exception("Missing required fields for distribution");
     }

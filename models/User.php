@@ -1,9 +1,11 @@
 <?php
+date_default_timezone_set('Asia/Manila');
 class User {
     private $pdo;
     private $table = "users";
     private $pendingTable = "pending_registrations";
 
+    
     public function __construct($db) {
         $this->pdo = $db;
     }
@@ -42,7 +44,7 @@ class User {
         return $stmt->execute();
     }
 
-     // Pending registration methods
+     
     public function createPending($username, $email, $password, $barangay, $code, $expires) {
         $stmt = $this->pdo->prepare("
             INSERT INTO {$this->pendingTable} (username, email, password, barangay, code, expires)
@@ -93,7 +95,7 @@ class User {
     }
 
     public function deactivateUser($userId, $superAdminId, $superAdminPassword) {
-    // Verify Super Admin
+    
     $superAdmin = $this->findById($superAdminId);
     if (!$superAdmin || $superAdmin['role'] != 1 || !password_verify($superAdminPassword, $superAdmin['password'])) {
         return ["success"=>false,"message"=>"Invalid Super Admin credentials"];
@@ -108,21 +110,20 @@ if ($user['role'] == 1) {
 
 
     
-    // Remove archived_at if exists to allow DB default
     if (isset($user['archived_at'])) {
         unset($user['archived_at']);
     }
 
-       // Set status to deactivated before moving to archive
+       
     $user['status'] = 'deactivated';
 
-    // Copy to archived_users
+    
     $columns = implode(", ", array_keys($user));
     $placeholders = ":" . implode(", :", array_keys($user));
     $stmt = $this->pdo->prepare("INSERT INTO archived_users ($columns) VALUES ($placeholders)");
     $stmt->execute($user);
 
-    // Delete from users
+    
     $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
     $stmt->execute([$userId]);
 
@@ -132,17 +133,17 @@ if ($user['role'] == 1) {
 
 
 public function activateUser($userId, $superAdminId, $superAdminPassword) {
-    // Verify Super Admin
+    
     $superAdmin = $this->findById($superAdminId);
     if (!$superAdmin || $superAdmin['role'] != 1 || !password_verify($superAdminPassword, $superAdmin['password'])) {
         return ["success" => false, "message" => "Invalid Super Admin credentials"];
     }
 
-    // Fetch user from archived_users
+
     $user = $this->findArchivedById($userId);
     if (!$user) return ["success" => false, "message" => "Archived user not found"];
 
-    // Remove archived_at before inserting back
+    
     if (isset($user['archived_at'])) {
         unset($user['archived_at']);
     }
@@ -216,17 +217,48 @@ public function findArchivedByUsername($username) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+public function cleanExpiredPendingRegistrations() {
+    $now = date('Y-m-d H:i:s');
 
+    try {
+        $stmt = $this->pdo->prepare("DELETE FROM {$this->pendingTable} WHERE expires <= ?");
+        $stmt->execute([$now]);
+        
+    } catch (PDOException $e) {
+        
+    }
+}
 
+public function checkPendingEmail($email) {
+    $now = date('Y-m-d H:i:s');
 
+    
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->pendingTable} WHERE email = ? LIMIT 1");
+    $stmt->execute([$email]);
+    $pending = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if ($pending) {
+        
+        if ($pending['expires'] > $now) {
+            return [
+                "exists" => true,
+                "message" => "A verification code has already been sent to this email and is still valid. Please check your inbox to continue the registration process."
+            ];
+        } else {
+            
+            $this->deletePending($pending['id']);
+            return [
+                "exists" => false,
+                "message" => "Previous verification code has expired. You can request a new code."
+            ];
+        }
+    }
 
-   
-
-
-
-
-
+    return [
+        "exists" => false,
+        "message" => "No pending registration found for this email."
+    ];
+}
 
     
 }

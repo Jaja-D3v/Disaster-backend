@@ -1,14 +1,23 @@
 <?php
 require_once "../config/db.php";
+require_once "../config/auth.php";
 require_once "../models/Advisory.php";
-
-
+require_once "../helpers/advisoryHelpers.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(["error" => "Only POST requests are allowed."]);
     exit();
 }
+
+$userId = $_SESSION['user_id'] ?? null;
+
+if (!$userId) {
+    http_response_code(401);
+    echo json_encode(["error" => "Unauthorized. Please log in."]);
+    exit();
+}
+
 
 
 $type = $_GET['type'] ?? '';
@@ -26,40 +35,35 @@ $pdo = $db->connect();
 $advisory = new Advisory($pdo);
 
 $result = false;
+$response = [];
 
 switch ($type) {
     case 'weather':
+        $data['added_by'] = $userId; 
         $result = $advisory->updateWeather($id, $data);
         $response["message"] = "Weather advisory updated.";
         break;
+
     case 'road':
+        $data['added_by'] = $userId; 
         $result = $advisory->updateRoad($id, $data);
         $response["message"] = "Road advisory updated.";
         break;
+
     case 'disaster':
-        $id = $_POST['id'] ?? null;
+        
+        $existing = $advisory->findDisasterById($id);
+        $oldImagePath = $existing['img_path'] ?? null;
+
         $title = $_POST['title'] ?? '';
         $details = $_POST['details'] ?? '';
         $dateTime = $_POST['dateTime'] ?? '';
         $disasterType = $_POST['disasterType'] ?? '';
-        $imagePath = null;
 
-        if (!$id) {
-            http_response_code(400);
-            echo json_encode(["error" => "Missing ID for update."]);
-            exit();
-        }
-
-     
-        $existing = $advisory->findDisasterById($id);
-        $oldImagePath = $existing['img_path'] ?? null;
-
-      
+        $imagePath = $oldImagePath;
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = __DIR__ . '/../uploads/disasterPost/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
+            if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
 
             $imageTmp = $_FILES['image']['tmp_name'];
             $imageName = time() . '_' . basename($_FILES['image']['name']);
@@ -71,19 +75,9 @@ switch ($type) {
                 exit();
             }
 
-          
-            if ($oldImagePath) {
-                $oldFullPath = __DIR__ . '/../' . $oldImagePath;
-                if (file_exists($oldFullPath)) {
-                    unlink($oldFullPath);
-                }
-            }
-
+            if ($oldImagePath) deleteDisasterImage($oldImagePath);
             $imagePath = 'uploads/disasterPost/' . $imageName;
-        } else {
-            $imagePath = $oldImagePath; 
         }
-
         
         $data = [
             'title' => $title,
@@ -92,15 +86,17 @@ switch ($type) {
             'disasterType' => $disasterType,
             'image' => $imagePath
         ];
-
+        $data['added_by'] = $userId; 
         $result = $advisory->updateDisaster($id, $data);
         $response["message"] = "Disaster update updated.";
         break;
 
     case 'community':
+        $data['added_by'] = $userId; 
         $result = $advisory->updateCommunity($id, $data);
         $response["message"] = "Community notice updated.";
         break;
+
     default:
         http_response_code(400);
         echo json_encode(["error" => "Invalid advisory type."]);
