@@ -3,10 +3,6 @@ require_once __DIR__ . '/../vendor/autoload.php'; // Load Composer autoload
 
 use Dotenv\Dotenv;
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-
-
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
