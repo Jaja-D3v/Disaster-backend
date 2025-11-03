@@ -3,7 +3,6 @@ require_once "../models/User.php";
 require_once "../config/db.php";
 
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
 
 $data = json_decode(file_get_contents("php://input"), true);
 $email = trim($data['email'] ?? "");

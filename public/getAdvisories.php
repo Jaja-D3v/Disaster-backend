@@ -12,5 +12,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once "../controllers/Auth.php"; 
+require_once "../config/auth.php"; 
 require_once "../controllers/getAdvisoryController.php";
