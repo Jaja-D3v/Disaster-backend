@@ -1,13 +1,13 @@
 <?php
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1);
+ini_set('session.cookie_secure', 0); //1
 ini_set('session.cookie_samesite', 'Strict');
 session_set_cookie_params([
     'lifetime' => 3600,
     'path' => '/',
     'httponly' => true,
-    'secure' => isset($_SERVER['HTTPS']),
-    'samesite' => 'Strict'
+    'secure' => false, //isset($_SERVER['HTTPS'])
+    'samesite' => 'Lax' //Strict
 ]);
 session_start();
 
