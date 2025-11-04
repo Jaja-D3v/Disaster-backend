@@ -42,6 +42,17 @@ if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d_+!@#$%^&*()-=]{8,}$/', $passw
 $db = (new Database())->connect();
 $userModel = new User($db);
 
+$archived = $userModel->isArchived($email);
+
+if ($archived) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Registering deactivated account. Please contact administrator."
+    ]);
+    exit;
+}
+
+
 $userModel->cleanExpiredPendingRegistrations();
 $checkPending = $userModel->checkPendingEmail($email);
 if ($checkPending['exists']) {
