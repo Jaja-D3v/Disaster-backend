@@ -260,5 +260,14 @@ public function checkPendingEmail($email) {
     ];
 }
 
+
+    public function isArchived($email)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM archived_users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+
+
     
 }
