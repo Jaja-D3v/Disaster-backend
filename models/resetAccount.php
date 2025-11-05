@@ -2,45 +2,52 @@
 require_once "../config/db.php";
 
 class User {
-    private $conn;
+    private $pdo;
 
     public function __construct() {
         $database = new Database();
-        $this->conn = $database->connect();
-        $this->conn->exec("SET time_zone = '+08:00'");
+        $this->pdo = $database->connect();
+        $this->pdo->exec("SET time_zone = '+08:00'");
+    }
+
+     public function isArchived($email)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM archived_users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
 
     public function findByEmail($email) {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function deleteResetTokenByToken($token) {
-        $stmt = $this->conn->prepare("DELETE FROM password_resets WHERE token LIKE ?");
+        $stmt = $this->pdo->prepare("DELETE FROM password_resets WHERE token LIKE ?");
         return $stmt->execute([$token]);
     }
 
     public function createResetToken($email, $token, $expires) {
-        $stmt = $this->conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         return $stmt->execute([$email, $token, $expires]);
     }
 
         
     public function updatePassword($email, $hashedPassword) {
-        $stmt = $this->conn->prepare("UPDATE users SET password = ?, updated_at = NOW() WHERE email = ?");
+        $stmt = $this->pdo->prepare("UPDATE users SET password = ?, updated_at = NOW() WHERE email = ?");
         return $stmt->execute([$hashedPassword, $email]);
     }
 
     public function deleteResetTokenByEmail($email) {
-        $stmt = $this->conn->prepare("DELETE FROM password_resets WHERE email = ?");
+        $stmt = $this->pdo->prepare("DELETE FROM password_resets WHERE email = ?");
         return $stmt->execute([$email]);
     }
         
 
     
     public function validateToken($token) {
-        $stmt = $this->conn->prepare("SELECT * FROM password_resets WHERE token LIKE ?");
+        $stmt = $this->pdo->prepare("SELECT * FROM password_resets WHERE token LIKE ?");
         $stmt->execute([$token]);
         $reset = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -60,13 +67,13 @@ class User {
 
        
     public function deleteResetByToken($token) {
-        $stmt = $this->conn->prepare("DELETE FROM password_resets WHERE token LIKE ?");
+        $stmt = $this->pdo->prepare("DELETE FROM password_resets WHERE token LIKE ?");
         return $stmt->execute([$token]);
     }
 
     public function resetPasswordWithToken($token, $newPassword, $confirmPassword) {
 
-    $stmt = $this->conn->prepare("SELECT * FROM password_resets WHERE token = ?");
+    $stmt = $this->pdo->prepare("SELECT * FROM password_resets WHERE token = ?");
     $stmt->execute([$token]);
     $reset = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -92,7 +99,7 @@ class User {
     }
 
     
-    $stmt = $this->conn->prepare("SELECT id, password FROM users WHERE email = ?");
+    $stmt = $this->pdo->prepare("SELECT id, password FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -108,7 +115,7 @@ class User {
     }
 
     
-    $stmt = $this->conn->prepare("
+    $stmt = $this->pdo->prepare("
         SELECT password, created_at 
         FROM password_history 
         WHERE user_id = ? 
@@ -134,10 +141,10 @@ class User {
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
     
-    $stmt = $this->conn->prepare("UPDATE users SET password = ?, updated_at = NOW() WHERE id = ?");
+    $stmt = $this->pdo->prepare("UPDATE users SET password = ?, updated_at = NOW() WHERE id = ?");
     if ($stmt->execute([$hashedPassword, $userId])) {
         
-        $stmt = $this->conn->prepare("INSERT INTO password_history (user_id, password, created_at) VALUES (?, ?, NOW())");
+        $stmt = $this->pdo->prepare("INSERT INTO password_history (user_id, password, created_at) VALUES (?, ?, NOW())");
         $stmt->execute([$userId, $hashedPassword]);
 
         

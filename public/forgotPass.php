@@ -5,7 +5,6 @@ require_once "../utils/rateLimiter.php";
 require_once "../utils/sendEmail.php";
 require_once "../config/db.php";
 
-
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\Exception;
 
@@ -50,6 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $userModel = new User();
     $user = $userModel->findByEmail($email);
+    $archivedUser = $userModel->isArchived($email);
+
+    if ($archivedUser) {
+        echo json_encode([
+            "success" => false,
+            "message" => "You cannot reset the password of a deactivated account. Please contact the system administrator for assistance."
+        ]);
+        exit; }
 
     if (!$user) {
         echo json_encode([
