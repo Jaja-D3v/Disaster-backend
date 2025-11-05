@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-echo json_encode([
+ json_encode([
     "success" => true,
     "user" => [
         "id" => $_SESSION['user_id'],
