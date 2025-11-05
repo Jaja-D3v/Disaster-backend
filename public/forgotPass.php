@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $userModel->deleteResetTokenByEmail($email);
     $userModel->createResetToken($email, $token, $expires);
 
-    $resetLink = "https://your-frontend-domain.com/resetPassword?token=$token";
+    $resetLink = "http://localhost:3000/reset-password?token=$token";
     $body = "
         Hi {$user['username']},<br><br>
         Click this link to reset your password:<br>
