@@ -350,3 +350,16 @@
 
 
 // http://localhost/Disaster-backend/public/fetchRelief.php // fetch all relief packs GET method
+
+
+
+
+
+//FETCH ENDPOINTS PARA SA CLIENT SIDE GET METHOD LANG LAHAT
+
+http://localhost/Disaster-backend/public/fetchWeatherAdvisoriesClient.php  - PARA SA WEATHER ADVISORIES
+http://localhost/Disaster-backend/public/fetchRoadAdvisoriesClient.php     - PARA SA ROAD ADVISORIES
+http://localhost/Disaster-backend/public/fetchEvacuationCenterClient.php    - PARA SA EVACUATION CENTERS
+http://localhost/Disaster-backend/public/fetchDisasterMappingClient.php     - PARA SA DISASTER MAPPING
+http://localhost/Disaster-backend/public/fetchCommunityNoticeClient.php     - PARA SA COMMUNITY NOTICE
+http://localhost/Disaster-backend/public/fetchBarangayContactInfoClient.php - PARA SA BARANGAY CONTACT INFO
