@@ -6,8 +6,9 @@ require_once "../models/Advisory.php";
 require_once "../config/auth.php";
 
 $userId = $_SESSION['user_id'] ?? null;
+$barangayname = $_SESSION['barangay'];
 
-if (!$userId) {
+if (!$barangayname) {
     http_response_code(401);
     echo json_encode(["error" => "Unauthorized. Please log in."]);
     exit();
@@ -32,7 +33,7 @@ switch ($type) {
             exit();
         }
 
-        $data['added_by'] = $userId;
+        $data['added_by'] = $barangayname;
 
         if ($type === 'weather') {
             $success = $advisory->createWeather($data);
@@ -80,7 +81,7 @@ switch ($type) {
             'dateTime' => $dateTime,
             'disasterType' => $disasterType,
             'image' => $imagePath,
-            'added_by' => $userId
+            'added_by' => $barangayname
         ];
 
         if ($advisory->createDisaster($data)) {
