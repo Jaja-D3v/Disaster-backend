@@ -29,7 +29,7 @@ try {
         throw new Exception("Pending ID and action are required");
     }
 
-    // Only approve, block, or unblock need admin check
+    
     if (!in_array($action, ['decline'])) {
         if (!isset($_SESSION['user_id'])) {
             throw new Exception("User not logged in");
@@ -43,7 +43,7 @@ try {
         if ($user['role'] != 1) throw new Exception("User is not authorized to manage accounts");
     }
 
-    // Prepare email and username depending on action
+    
     if ($action === 'unblock') {
         $blockedEmail = $userModel->getBlockedEmailById($pendingId);
         if (!$blockedEmail) throw new Exception("Blocked email not found");
@@ -58,7 +58,7 @@ try {
         $username = $pendingUser['username'];
     }
 
-    // Perform the action
+    
     switch ($action) {
         case 'approve':
             $userModel->approvePending($pendingUser);
