@@ -40,6 +40,14 @@ public function distribute($relief_pack_id, $selected_barangays, $allocation_mod
     $stmt = $this->pdo->prepare("SELECT id, barangay_name, total_male, total_female, total_families FROM barangay_contact_info WHERE id IN ($placeholders)");
     $stmt->execute($selected_barangays);
     $barangays_info = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    $found_ids = array_column($barangays_info, 'id');
+    $missing_ids = array_diff($selected_barangays, $found_ids);
+
+    if (!empty($missing_ids)) {
+        throw new Exception("Selected barangay ID(s) not existing in our system: " . implode(', ', $missing_ids));
+    }
+
 
     if (empty($barangays_info)) {
         throw new Exception("No valid barangays found");
