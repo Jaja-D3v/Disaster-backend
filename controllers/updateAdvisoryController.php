@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $userId = $_SESSION['user_id'] ?? null;
-
-if (!$userId) {
+$barangayname =  $_SESSION['barangay'];
+if (!$barangayname) {
     http_response_code(401);
     echo json_encode(["error" => "Unauthorized. Please log in."]);
     exit();
@@ -39,13 +39,13 @@ $response = [];
 
 switch ($type) {
     case 'weather':
-        $data['added_by'] = $userId; 
+        $data['added_by'] = $barangayname; 
         $result = $advisory->updateWeather($id, $data);
         $response["message"] = "Weather advisory updated.";
         break;
 
     case 'road':
-        $data['added_by'] = $userId; 
+        $data['added_by'] = $barangayname; 
         $result = $advisory->updateRoad($id, $data);
         $response["message"] = "Road advisory updated.";
         break;
@@ -86,13 +86,13 @@ switch ($type) {
             'disasterType' => $disasterType,
             'image' => $imagePath
         ];
-        $data['added_by'] = $userId; 
+        $data['added_by'] = $barangayname; 
         $result = $advisory->updateDisaster($id, $data);
         $response["message"] = "Disaster update updated.";
         break;
 
     case 'community':
-        $data['added_by'] = $userId; 
+        $data['added_by'] = $barangayname; 
         $result = $advisory->updateCommunity($id, $data);
         $response["message"] = "Community notice updated.";
         break;
