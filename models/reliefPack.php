@@ -5,8 +5,6 @@ class ReliefPack {
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
-
-    
     public function insert($description, $total_packs, $date_input) {
         if ($total_packs <= 0) {
             throw new Exception("Total packs must be greater than zero");
@@ -94,12 +92,22 @@ class ReliefPack {
         }
 
         
-        $stmt = $this->pdo->prepare("INSERT INTO relief_pack_barangays (relief_pack_id, barangay_id, allocated_packs) VALUES (?, ?, ?)");
-        $total_allocated = 0;
-        foreach ($allocations as $barangay_id => $packs) {
-            $stmt->execute([$relief_pack_id, $barangay_id, $packs]);
-            $total_allocated += $packs;
-        }
+
+            $stmt = $this->pdo->prepare("INSERT INTO relief_pack_barangays (relief_pack_id, barangay_id, allocated_packs) VALUES (?, ?, ?)");
+
+            $total_allocated = 0;
+            foreach ($allocations as $barangay_id => $packs) {
+                $barangay_name = '';
+                foreach ($barangays_info as $b) {
+                    if ($b['id'] == $barangay_id) {
+                        $barangay_name = $b['barangay_name'];
+                        break;
+                    }
+                }
+                $stmt->execute([$relief_pack['description'], $barangay_name, $packs]);
+                $total_allocated += $packs;
+            }
+
 
         
         $remaining_packs = $total_packs_available - $total_allocated;
@@ -125,14 +133,10 @@ class ReliefPack {
     }
 
     public function getAllBarangaysReceived() {
-        $stmt = $this->pdo->query("  SELECT 
-            rpb.*, 
-            rp.description AS relief_pack_name,
-            bci.barangay_name
-        FROM relief_pack_barangays rpb
-        JOIN relief_packs rp ON rpb.relief_pack_id = rp.id
-        JOIN barangay_contact_info bci ON rpb.barangay_id = bci.id
-        ORDER BY rpb.created_at DESC");
+        $stmt = $this->pdo->query("      
+        SELECT *
+        FROM relief_pack_barangays
+        ORDER BY created_at DESC");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
     }

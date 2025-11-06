@@ -604,3 +604,15 @@ CREATE TABLE pending_account_request (
     login_attempts INT DEFAULT 0,
     last_attempt_at DATETIME NULL
 );
+
+// NEW TABLE FOR RELIEF PACKS AND BARANGAY ALLOCATION WITH RELIEF PACK NAME NOTE: DROP MUNA YUNG relief_pack_barangays TABLE BAGO ILAGAY TONG BAGO 
+
+CREATE TABLE `relief_packs_barangay` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `relief_pack_id` VARCHAR(255) NOT NULL,
+  `barangay_id` VARCHAR(255) NOT NULL,
+  `allocated_packs` INT(11) NOT NULL,
+  `created_at` INT(11) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `relief_pack_name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

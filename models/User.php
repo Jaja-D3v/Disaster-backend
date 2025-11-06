@@ -281,14 +281,57 @@ public function checkPendingEmail($email) {
         $stmt = $this->pdo->prepare("SELECT * FROM pending_account_request WHERE username = ?");
         $stmt->execute([$username]);
         return  $stmt->fetch(PDO::FETCH_ASSOC); 
-         
-
     }
 
     public function createAccountRequest($username, $email, $password, $role, $barangay) {
         $sql = "INSERT INTO pending_account_request (username, email, password, role, barangay) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$username, $email, $password, $role, $barangay]);
+    }
+
+    public function fetchAllPending()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM pending_account_request ORDER BY created_at DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getById($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getPendingById($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM pending_account_request WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function approvePending($pendingUser) {
+        // Insert into users table
+        $stmt = $this->pdo->prepare("
+            INSERT INTO users
+            (username, email, password, role, status, barangay, last_logged_in, created_at, updated_at, login_attempts, last_attempt_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $pendingUser['username'],
+            $pendingUser['email'],
+            $pendingUser['password'],
+            $pendingUser['role'],
+            'approved',
+            $pendingUser['barangay'],
+            $pendingUser['last_logged_in'],
+            $pendingUser['created_at'],
+            date("Y-m-d H:i:s"), 
+            $pendingUser['login_attempts'],
+            $pendingUser['last_attempt_at']
+        ]);
+    }
+
+    public function deletePendingRequest($pendingId) {
+        $stmt = $this->pdo->prepare("DELETE FROM pending_account_request WHERE id = ?");
+        $stmt->execute([$pendingId]);
     }
 
 
