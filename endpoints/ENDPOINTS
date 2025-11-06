@@ -375,9 +375,12 @@
 // {
 //     "id": 3,
 //     "password": "adminPassword" --password ng super admin na nag-aapprove mismong naka login dapat
+//    "action": "approve" / "decline" / "block" / "unblock"  -- NOTE: PAG DECLINE HINDI NA KAILANGAN YUNG PASSWORD FIELD
 // }
 
 
 
 
 // http://localhost:3001/public/fetchPendingAccount.php  // GET method para sa pending account requests
+
+//http://localhost/Disaster-backend/public/fetchBlockedEmails.php  // GET method para sa blocked emails list
