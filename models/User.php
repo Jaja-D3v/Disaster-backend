@@ -276,6 +276,21 @@ public function checkPendingEmail($email) {
         return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
 
+     public function isAccountPending($username)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM pending_account_request WHERE username = ?");
+        $stmt->execute([$username]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC); 
+        return $data;
+
+    }
+
+    public function createAccountRequest($username, $email, $password, $role, $barangay) {
+        $sql = "INSERT INTO pending_account_request (username, email, password, role, barangay) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$username, $email, $password, $role, $barangay]);
+    }
+
 
     
 }
