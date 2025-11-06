@@ -8,14 +8,14 @@ try {
     $db = new Database();
     $pdo = $db->connect();
 
-    $reliefPackModel = new ReliefPack($pdo);
+    $barangayReceivedPacks = new ReliefPack($pdo);
 
     
-    $relief_packs = $reliefPackModel->fetchAll();
+    $listOfBarangays = $barangayReceivedPacks->getAllBarangaysReceived();
 
     echo json_encode([
         "success" => true,
-        "relief_packs" => $relief_packs
+        "listOfBarangays" => $listOfBarangays
     ]);
 
 } catch (Exception $e) {
