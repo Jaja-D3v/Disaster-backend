@@ -35,25 +35,7 @@
 
     $user = $userModel->findByUsername($username);
 
-    if (!$user) {
-        
-        $archivedUser = $userModel->findArchivedByUsername($username);
-        if ($archivedUser) {
-            echo json_encode([
-                "success" => false,
-                "message" => "Your account is currently deactivated. Please reach out to the administrator to restore access."
-            ]);
-            exit;
-        } else {
-            echo json_encode([
-                "success" => false,
-                "message" => "Invalid username or password."
-            ]);
-            exit;
-        }
-    }
-
-
+    
     $attemptData = $userModel->getUserAttempts($username);
 
     if ($attemptData) {
@@ -83,6 +65,15 @@
         echo json_encode([
                 "success" => false,
                 "message" => "Your account is deactivated . Please contact administrator."
+            ]);
+            exit;
+    }
+
+      $isPending = $userModel->isAccountPending($username);
+    if ($isPending && password_verify($password, $isPending["password"])) {
+        echo json_encode([
+                "success" => false,
+                "message" => "Your account is currently under review. Please wait for an email notification from the system once the administrator has approved your request."
             ]);
             exit;
     }

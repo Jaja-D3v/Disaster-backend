@@ -371,3 +371,13 @@
 
 // http://localhost:3001/public/fetchDonations.php  // GET method para Donations
 //http://localhost:3001/public/fetchBarangayReceivedPacks.php // GET method para sa list of barangays that recieved relief packs
+//http://localhost:3001/public/acceptRequest.php // PUT method para sa pag accept ng pending account request
+// {
+//     "id": 3,
+//     "password": "adminPassword" --password ng super admin na nag-aapprove mismong naka login dapat
+// }
+
+
+
+
+// http://localhost:3001/public/fetchPendingAccount.php  // GET method para sa pending account requests

@@ -103,7 +103,7 @@ if ($checkPending['exists']) {
 
 $totalAccounts = $userModel->countUsers();
 if ($totalAccounts >= 25) {
-    echo json_encode(["success" => false, "message" => "Maximum number of accounts (25) reached."]);
+    echo json_encode(["success" => false, "message" => "We’re sorry, but registration is temporarily disabled because the maximum limit of 25 accounts has been reached."]);
     exit;
 }
 
