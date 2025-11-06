@@ -1,18 +1,20 @@
-# Use official PHP 8.2 CLI image
-FROM php:8.2-cli
+# Use official PHP 8.2 Apache image
+FROM php:8.2-apache
 
-# Set working directory inside the container
-WORKDIR /app
+# Enable PDO MySQL
+RUN docker-php-ext-install pdo pdo_mysql
 
-# Copy all your backend files into the container
-COPY . .
+# Set working directory inside container
+WORKDIR /var/www/html/
 
-# Expose port for Render
-EXPOSE 10000
+# Copy your backend files into Apache's web root
+COPY . /var/www/html/
 
-# Install Composer if you need dependencies
+# Expose default Apache port
+EXPOSE 80
+
+# (Optional) Install Composer if you have dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install || true  # ignore if no composer.json
+RUN composer install || true
 
-# Start PHP built-in server, serve public folder
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
+# Apache will start automatically, so no CMD is required
