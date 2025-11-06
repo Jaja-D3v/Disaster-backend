@@ -584,3 +584,23 @@ ALTER TABLE relief_pack_barangays
 ADD CONSTRAINT relief_pack_barangays_ibfk_1
 FOREIGN KEY (relief_pack_id) REFERENCES relief_packs(id)
 ON DELETE CASCADE;
+
+
+
+
+// NEW TABLE FOR ACCOUNT REQUESTS MANAGEMENT
+
+CREATE TABLE pending_account_request (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role INT NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
+    barangay VARCHAR(255),
+    last_logged_in DATETIME NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    login_attempts INT DEFAULT 0,
+    last_attempt_at DATETIME NULL
+);
