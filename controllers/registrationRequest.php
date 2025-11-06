@@ -80,9 +80,9 @@ if (!$captchaResult["success"]) {
 $db = (new Database())->connect();
 $userModel = new User($db);
 
-
+ // NOTE 5 REQUEST LANG PER HOUR
 $rateLimiter = new RateLimiter($db);
-$rateLimiter->checkLimit($email, 'register', 5, 1); // 5 requests per 1 hour
+$rateLimiter->checkLimit($email, 'register', 5, 1); 
 
 $archived = $userModel->isArchived($email);
 if ($archived) {
@@ -92,6 +92,24 @@ if ($archived) {
     ]);
     exit;
 }
+
+if ($userModel->isEmailBlocked($email)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "This email has been blocked. You cannot request an account. Please contact administrator."
+    ]);
+    exit;
+}
+
+if ($userModel->getPendingByEmail($email)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Your email is already in pending status. Please wait for a confirmation email from the system regarding your approval."
+    ]);
+    exit;
+}
+
+
 
 
 $userModel->cleanExpiredPendingRegistrations();
