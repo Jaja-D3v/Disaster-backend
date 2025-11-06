@@ -125,9 +125,13 @@ class ReliefPack {
     }
 
     public function getAllBarangaysReceived() {
-        $stmt = $this->pdo->query("SELECT rpb.*, rp.description AS relief_pack_name
+        $stmt = $this->pdo->query("  SELECT 
+            rpb.*, 
+            rp.description AS relief_pack_name,
+            bci.barangay_name
         FROM relief_pack_barangays rpb
         JOIN relief_packs rp ON rpb.relief_pack_id = rp.id
+        JOIN barangay_contact_info bci ON rpb.barangay_id = bci.id
         ORDER BY rpb.created_at DESC");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rows;

@@ -280,8 +280,8 @@ public function checkPendingEmail($email) {
     {
         $stmt = $this->pdo->prepare("SELECT * FROM pending_account_request WHERE username = ?");
         $stmt->execute([$username]);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC); 
-        return $data;
+        return  $stmt->fetch(PDO::FETCH_ASSOC); 
+         
 
     }
 
