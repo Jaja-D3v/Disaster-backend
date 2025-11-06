@@ -370,3 +370,4 @@
 
 
 // http://localhost:3001/public/fetchDonations.php  // GET method para Donations
+//http://localhost:3001/controllers/fetchRecievedBarangaysRelief.php // GET method para sa list of barangays that recieved relief packs
