@@ -81,7 +81,7 @@ class ReliefPack {
                 }
 
                 if ($count > $total_packs_available) {
-                    throw new Exception("Insufficient relief packs for barangay ID {$b['id']}");
+                    throw new Exception("Insufficient relief packs for selected barangays based on $based_on.");
                 }
 
                 $allocations[$b['id']] = $count;
