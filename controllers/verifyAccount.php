@@ -45,7 +45,7 @@ if ($pending['code'] !== $codeInput) {
 }
 
 
-$created = $userModel->createUser(
+$created = $userModel->createAccountRequest(
     $pending['username'],
     $pending['email'],
     $pending['password'],
@@ -57,7 +57,7 @@ $created = $userModel->createUser(
 $userModel->deletePending($pending['id']);
 
 if ($created) {
-    echo json_encode(["success" => true, "message" => "User registered successfully."]);
+    echo json_encode(["success" => true, "message" => "Your registration was successful. After verifying your email, your account will be pending approval by the administrator. Once your request is reviewed and approved, the system will notify you via email.."]); // success request
 } else {
     echo json_encode(["success" => false, "message" => "Failed to create user."]);
 }
