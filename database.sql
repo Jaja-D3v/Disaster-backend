@@ -616,3 +616,7 @@ CREATE TABLE `relief_packs_barangay` (
   `relief_pack_name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+// ADDING NUMBER COLUMN TO USERS TABLE
+ALTER TABLE users ADD COLUMN number VARCHAR(20) NULL;
+
