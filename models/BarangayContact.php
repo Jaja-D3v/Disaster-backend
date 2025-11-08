@@ -112,6 +112,11 @@ class BarangayContact {
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+     public function getByNumber($barangayName) {
+        $stmt = $this->pdo->prepare("SELECT contact_number FROM {$this->table} WHERE barangay_name = :barangay_name");
+        $stmt->execute([':barangay_name' => $barangayName]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     protected function checkExisting($barangay_name, $email) {
         $sql = "SELECT COUNT(*) FROM {$this->table} 
