@@ -18,10 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $disasterUpdate = $disasterUpdateModel->getAllDisasterUpdate();
         }
 
-        echo json_encode([
-            "success" => true,
-            "data" => $disasterUpdate
-        ]);
+        echo json_encode($disasterUpdate);
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode([

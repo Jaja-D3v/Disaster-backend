@@ -18,10 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $weatherAdvisories = $weatherAdvisoriesModel->getAllWeatherAdvisories();
         }
 
-        echo json_encode([
-            "success" => true,
-            "data" => $weatherAdvisories
-        ]);
+        echo json_encode ($weatherAdvisories);
+        
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode([
