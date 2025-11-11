@@ -4,7 +4,7 @@ require_once "../models/Client.php";
 
 $db = new Database();
 $pdo = $db->connect();
-$evacuationCenterModel = new Client($pdo);
+$disasterUpdateModel = new Client($pdo);
 
 header("Content-Type: application/json");
 
@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = (int)$_GET['id']; 
-            $evacuationCenter = $evacuationCenterModel->getAllEvacuationCenterById($id);
+            $disasterUpdate = $disasterUpdateModel->getAllDisasterUpdateById($id);
         } else {
-            $evacuationCenter = $evacuationCenterModel->getAllEvacuationCenter();
+            $disasterUpdate = $disasterUpdateModel->getAllDisasterUpdate();
         }
 
         echo json_encode([
             "success" => true,
-            "data" => $evacuationCenter
+            "data" => $disasterUpdate
         ]);
     } catch (PDOException $e) {
         http_response_code(500);

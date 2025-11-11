@@ -5,11 +5,19 @@ require_once "../models/Client.php";
 $db = new Database();
 $pdo = $db->connect();
 $communityNoticeModel = new Client($pdo);
+
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $communityNotice = $communityNoticeModel->getAllCommunityNotice(); 
+        
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = (int)$_GET['id']; 
+            $communityNotice = $communityNoticeModel->getAllCommunityNoticeById($id);
+        } else {
+            $communityNotice = $communityNoticeModel->getAllCommunityNotice();
+        }
+
         echo json_encode([
             "success" => true,
             "data" => $communityNotice
@@ -28,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         "message" => "Method not allowed"
     ]);
 }
+

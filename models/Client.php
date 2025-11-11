@@ -7,14 +7,26 @@ class Client {
     private $table_community_notice = "community_notice";
     private $table_evacuation_center = "evacuation_center";
     private $table_disaster_mapping = "disaster_mapping";
+    private $table_disaster_update = "disaster_update";
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
 
 
-    public function getAllBarangayCntactInfo() {
-        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_barangay_contact_info} ORDER BY id DESC"); // goods na 
+    public function getAllBarangayContactInfo() {
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_barangay_contact_info} ORDER BY id DESC"); 
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($data) {
+            return $data;
+        } else {
+            return "No available data";
+        }
+    }
+
+    public function getAllDisasterUpdate() {
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_disaster_update} ORDER BY id DESC"); // goods na 
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($data) {
@@ -80,5 +92,100 @@ class Client {
         } else {
             return "No available data";
         }
+    }
+
+
+
+    // Get by ID functions
+
+    public function getAllBarangayContactInfoById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_barangay_contact_info} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+     public function getAllWeatherAdvisoriesById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_weather_advisories} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+     public function getAllRoadAdvisoriesById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_road_advisories} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+     public function getAllCommunityNoticeById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_community_notice} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+    public function getAllEvacuationCenterById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_evacuation_center} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+    public function getAllDisasterMappingById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_disaster_mapping} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
+    }
+
+    public function getAllDisasterUpdateById($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_disaster_update} WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        return $data;
+    } else {
+        return "No available data";
+    }
     }
 }
