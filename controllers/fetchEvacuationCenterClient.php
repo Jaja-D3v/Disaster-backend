@@ -18,10 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $evacuationCenter = $evacuationCenterModel->getAllEvacuationCenter();
         }
 
-        echo json_encode([
-            "success" => true,
-            "data" => $evacuationCenter
-        ]);
+        echo json_encode($evacuationCenter);
+        
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode([

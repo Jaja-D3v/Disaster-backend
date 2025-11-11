@@ -18,10 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $barangayContactInfo = $barangayContactInfoModel->getAllBarangayContactInfo();
         }
 
-        echo json_encode([
-            "success" => true,
-            "data" => $barangayContactInfo
-        ]);
+        echo json_encode($barangayContactInfo);
+        
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode([
