@@ -5,11 +5,19 @@ require_once "../models/Client.php";
 $db = new Database();
 $pdo = $db->connect();
 $weatherAdvisoriesModel = new Client($pdo);
+
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $weatherAdvisories = $weatherAdvisoriesModel->getAllWeatherAdvisories(); 
+        
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = (int)$_GET['id']; 
+            $weatherAdvisories = $weatherAdvisoriesModel->getAllWeatherAdvisoriesById($id);
+        } else {
+            $weatherAdvisories = $weatherAdvisoriesModel->getAllWeatherAdvisories();
+        }
+
         echo json_encode([
             "success" => true,
             "data" => $weatherAdvisories
@@ -28,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         "message" => "Method not allowed"
     ]);
 }
+

@@ -5,11 +5,19 @@ require_once "../models/Client.php";
 $db = new Database();
 $pdo = $db->connect();
 $barangayContactInfoModel = new Client($pdo);
+
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $barangayContactInfo = $barangayContactInfoModel->getAllBarangayCntactInfo(); 
+        
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = (int)$_GET['id']; 
+            $barangayContactInfo = $barangayContactInfoModel->getAllBarangayContactInfoById($id);
+        } else {
+            $barangayContactInfo = $barangayContactInfoModel->getAllBarangayContactInfo();
+        }
+
         echo json_encode([
             "success" => true,
             "data" => $barangayContactInfo
@@ -28,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         "message" => "Method not allowed"
     ]);
 }
+

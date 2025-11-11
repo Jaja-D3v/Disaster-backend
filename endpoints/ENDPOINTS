@@ -384,3 +384,5 @@
 // http://localhost:3001/public/fetchPendingAccount.php  // GET method para sa pending account requests
 
 //http://localhost/Disaster-backend/public/fetchBlockedEmails.php  // GET method para sa blocked emails list
+
+//https://greenyellow-lion-623632.hostingersite.com/public/fetchDisasterUpdateClient.php  // PARA SA DISASTER UPDATES CLIENT SIDE GET METHOD

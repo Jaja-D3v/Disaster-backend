@@ -5,11 +5,19 @@ require_once "../models/Client.php";
 $db = new Database();
 $pdo = $db->connect();
 $disasterMappingModel = new Client($pdo);
+
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $disasterMapping = $disasterMappingModel->getAllDisasterMapping(); 
+        
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = (int)$_GET['id']; 
+            $disasterMapping = $disasterMappingModel->getAllDisasterMappingById($id);
+        } else {
+            $disasterMapping = $disasterMappingModel->getAllDisasterMapping();
+        }
+
         echo json_encode([
             "success" => true,
             "data" => $disasterMapping
@@ -28,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         "message" => "Method not allowed"
     ]);
 }
+
