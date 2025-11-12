@@ -35,8 +35,52 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-
 $input = json_decode(file_get_contents("php://input"), true);
+
+if (strlen($input['details']['card_number']) !== 16) {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid card number length"]);
+    exit;
+}
+
+if (strlen($input['details']['cvc']) !== 3) {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid CVC length"]);
+    exit;
+}
+
+
+
+if ($input['details']['exp_month'] > 12 || $input['details']['exp_month'] < 1) {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid expiration month"]);
+    exit;
+}
+
+if (!is_numeric($input['details']['exp_year'])){
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid year format"]);
+    exit;
+}
+
+
+$currentYear = (int)date('y'); 
+$currentMonth = (int)date('m');
+
+if (
+    (int)$input['details']['exp_year'] < $currentYear ||
+    (
+        (int)$input['details']['exp_year'] === $currentYear &&
+        (int)$input['details']['exp_month'] < $currentMonth
+    )
+) {
+    http_response_code(400);
+    echo json_encode(["error" => "Your card is already expired"]);
+    exit;
+}
+
+// ✅ reCAPTCHA verification
+
 $captchaToken = $input["g-recaptcha-response"] ?? null;
 
 if (!$captchaToken) {
