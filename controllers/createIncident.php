@@ -41,10 +41,10 @@ $lng              = $_POST['lng'] ?? null;
 $severity         = $_POST['severity'] ?? null;
 
 
-// if (!$reporter_contact || !$description) {
-//     echo json_encode(['error' => 'Contact and description are required']);
-//     exit;
-// }
+if (!$reporter_contact || !$description) {
+    echo json_encode(['error' => 'Contact and description are required']);
+    exit;
+}
 
 $media_path = null;
 if (!empty($_FILES['media']['name'])) {
@@ -74,7 +74,7 @@ if ($lat && $lng) {
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    if ($httpcode === 200 && $responseGeo) {
+    
         $data = json_decode($responseGeo, true);
         $barangayName = $data['address']['quarter']
             ?? $data['address']['suburb']
@@ -89,7 +89,7 @@ if ($lat && $lng) {
             ?? 'Unknown City';
 
     
-    }
+    
 }
 
 if ($city !== "Los Baños") { 
