@@ -12,4 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+// // Just echo the raw received data
+// $response = [
+//     'method' => $_SERVER['REQUEST_METHOD'],
+//     'POST'   => $_POST,
+//     'FILES'  => $_FILES,
+// ];
+
+// // Return JSON for easy viewing in browser
+// header("Content-Type: application/json");
+// echo json_encode($response, JSON_PRETTY_PRINT);
+// exit;
+
 require_once "../controllers/createIncident.php";
