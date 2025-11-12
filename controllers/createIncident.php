@@ -31,14 +31,16 @@ $dotenv->load();
 $db = new Database();
 $pdo = $db->connect();
 $incidentModel = new Incident($pdo);
-$data = json_decode(file_get_contents('php://input'), true);
 
-$reporter_name = $data['reporter_name'] ?? null;
-$reporter_contact = $data['reporter_contact'] ?? null;
-$description = $data['description'] ?? null;
-$lat = $data['lat'] ?? null;
-$lng = $data['lng'] ?? null;
-$severity = $data['severity'] ?? null;
+
+$reporter_name    = $_POST['reporter_name'] ?? null;
+$reporter_contact = $_POST['reporter_contact'] ?? null;
+$description      = $_POST['description'] ?? null;
+$lat              = $_POST['lat'] ?? null;
+$lng              = $_POST['lng'] ?? null;
+$severity         = $_POST['severity'] ?? null;
+
+
 
 if (!$reporter_contact || !$description) {
     echo json_encode(['error' => 'Contact and description are required']);
