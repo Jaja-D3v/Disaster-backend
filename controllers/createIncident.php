@@ -41,7 +41,6 @@ $lng              = $_POST['lng'] ?? null;
 $severity         = $_POST['severity'] ?? null;
 
 
-
 if (!$reporter_contact || !$description) {
     echo json_encode(['error' => 'Contact and description are required']);
     exit;
