@@ -7,37 +7,38 @@ require_once __DIR__ . '/../models/BarangayContact.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-$recaptchaSecret = $_ENV['RECAPTCHA_SECRET'] ?? null;
-if (!$recaptchaSecret) {
-    echo json_encode(['error' => 'reCAPTCHA secret key not found']);
-    exit;
-}
+// $recaptchaSecret = $_ENV['RECAPTCHA_SECRET'] ?? null;
+// if (!$recaptchaSecret) {
+//     echo json_encode(['error' => 'reCAPTCHA secret key not found']);
+//     exit;
+// }
 
-$captcha = $_POST['g-recaptcha-response'] ?? null;
-if (!$captcha) {
-    echo json_encode(['error' => 'Captcha missing']);
-    exit;
-}
+// $captcha = $_POST['g-recaptcha-response'] ?? null;
+// if (!$captcha) {
+//     echo json_encode(['error' => 'Captcha missing']);
+//     exit;
+// }
 
-$verify = file_get_contents(
-    "https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$captcha"
-);
-$responseCaptcha = json_decode($verify);
-if (!$responseCaptcha->success) {
-    echo json_encode(['error' => 'Captcha verification failed']);
-    exit;
-}
+// $verify = file_get_contents(
+//     "https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$captcha"
+// );
+// $responseCaptcha = json_decode($verify);
+// if (!$responseCaptcha->success) {
+//     echo json_encode(['error' => 'Captcha verification failed']);
+//     exit;
+// }
 
 $db = new Database();
 $pdo = $db->connect();
 $incidentModel = new Incident($pdo);
+$data = json_decode(file_get_contents('php://input'), true);
 
-$reporter_name = $_POST['reporter_name'] ?? null;
-$reporter_contact = $_POST['reporter_contact'] ?? null;
-$description = $_POST['description'] ?? null;
-$lat = $_POST['lat'] ?? null;
-$lng = $_POST['lng'] ?? null;
-$severity = $_POST['severity'] ?? null;
+$reporter_name = $data['reporter_name'] ?? null;
+$reporter_contact = $data['reporter_contact'] ?? null;
+$description = $data['description'] ?? null;
+$lat = $data['lat'] ?? null;
+$lng = $data['lng'] ?? null;
+$severity = $data['severity'] ?? null;
 
 if (!$reporter_contact || !$description) {
     echo json_encode(['error' => 'Contact and description are required']);
