@@ -90,6 +90,15 @@ if ($lat && $lng) {
     }
 }
 
+if ($city !== "Los Baños") { 
+    echo json_encode([
+        'success' => false,
+        'error' => 'Incidents can only be reported within Los Baños.'
+    ]);
+    exit;
+}
+
+
 $barangayModel = new BarangayContact($pdo);
 $barangayInfo = $barangayModel->getByNumber($barangayName);
 $recipient = $barangayInfo['contact_number'] ?? null;
@@ -127,6 +136,10 @@ if ($recipient && $city === "Los Baños") {
         error_log("SMS failed for $recipient: $smsResponse");
     }
 
+
+
+} 
+
 $incidentModel->createIncident(
     $reporter_name,
     $reporter_contact,
@@ -137,7 +150,6 @@ $incidentModel->createIncident(
     $media_path
 );
 
-
 echo json_encode([
     'success' => true,
     'message' => 'Incident reported successfully',
@@ -145,7 +157,3 @@ echo json_encode([
     'barangay' => $barangayName,
     'sms_sent' => $recipient ? true : false
 ]);
-
-} else {
-    echo json_encode(['error' => 'Cannot report incident outside Los Baños ']); 
-    exit;}
