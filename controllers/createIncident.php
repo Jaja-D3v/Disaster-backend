@@ -1,32 +1,35 @@
 <?php
+header('Content-Type: application/json');
 require_once __DIR__ . '/../vendor/autoload.php'; 
 require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../utils/telcoChecker.php';
+require_once __DIR__ . '/../utils/smsSender.php';
 require_once __DIR__ . '/../models/incident.php';
 require_once __DIR__ . '/../models/BarangayContact.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-// $recaptchaSecret = $_ENV['RECAPTCHA_SECRET'] ?? null;
-// if (!$recaptchaSecret) {
-//     echo json_encode(['error' => 'reCAPTCHA secret key not found']);
-//     exit;
-// }
+$recaptchaSecret = $_ENV['RECAPTCHA_SECRET'] ?? null;
+if (!$recaptchaSecret) {
+    echo json_encode(['error' => 'reCAPTCHA secret key not found']);
+    exit;
+}
 
-// $captcha = $_POST['g-recaptcha-response'] ?? null;
-// if (!$captcha) {
-//     echo json_encode(['error' => 'Captcha missing']);
-//     exit;
-// }
+$captcha = $_POST['g-recaptcha-response'] ?? null;
+if (!$captcha) {
+    echo json_encode(['error' => 'Captcha missing']);
+    exit;
+}
 
-// $verify = file_get_contents(
-//     "https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$captcha"
-// );
-// $responseCaptcha = json_decode($verify);
-// if (!$responseCaptcha->success) {
-//     echo json_encode(['error' => 'Captcha verification failed']);
-//     exit;
-// }
+$verify = file_get_contents(
+    "https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$captcha"
+);
+$responseCaptcha = json_decode($verify);
+if (!$responseCaptcha->success) {
+    echo json_encode(['error' => 'Captcha verification failed']);
+    exit;
+}
 
 $db = new Database();
 $pdo = $db->connect();
@@ -40,12 +43,25 @@ $lat              = $_POST['lat'] ?? null;
 $lng              = $_POST['lng'] ?? null;
 $severity         = $_POST['severity'] ?? null;
 
+$contactLength = strlen($reporter_contact);
+
+if(substr($reporter_contact, 0, 3) !== '639' || $contactLength != 12) {
+    echo json_encode(['error' => 'Invalid contact number format.']);
+    exit;
+}
+
+
+if ($lat == 0.00000000) {
+    echo json_encode(['error' => 'Please check your location settings and allow location access.']);
+    exit;
+}
 
 if (!$reporter_contact || !$description) {
     echo json_encode(['error' => 'Contact and description are required']);
     exit;
 }
 
+// FILE UPLOAD HANDLING
 $media_path = null;
 if (!empty($_FILES['media']['name'])) {
     $uploadDir = __DIR__ . '/../uploads/incidentPhotos/';
@@ -62,35 +78,46 @@ if (!empty($_FILES['media']['name'])) {
     }
 }
 
+// GEOLOCATION PROCESSING
 
 $barangayName = 'Unknown Barangay';
+$city = 'Unknown City';
+
+$GEOAPIFY_KEY = $_ENV['GEOAPIFY_KEY'] ?? null;
+if (!$GEOAPIFY_KEY) {
+    echo json_encode(['error' => 'Geoapify API key not set in .env']);
+    exit;
+}
+
 if ($lat && $lng) {
-    $url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=$lat&lon=$lng&zoom=18&addressdetails=1";
-    
+    $url = "https://api.geoapify.com/v1/geocode/reverse?lat=$lat&lon=$lng&format=json&apiKey=$GEOAPIFY_KEY";
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_USERAGENT, "DisasterReady/1.0 (contact: jaredabrera@example.com)");
+    curl_setopt($ch, CURLOPT_USERAGENT, "DisasterReadyApp/1.0 (contact: jaredabrera@example.com)");
     $responseGeo = curl_exec($ch);
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    
-        $data = json_decode($responseGeo, true);
-        $barangayName = $data['address']['quarter']
-            ?? $data['address']['suburb']
-            ?? $data['address']['village']
-            ?? $data['address']['neighbourhood']
-            ?? 'Unknown Barangay';
+    if ($httpcode !== 200) {
+        echo json_encode([
+            'error' => 'Geoapify reverse geocoding failed',
+            'http_code' => $httpcode,
+            'response' => $responseGeo
+        ]);
+        exit;
+    }
 
-         $city = $data['address']['city']
-            ?? $data['address']['town']
-            ?? $data['address']['municipality']
-            ?? $data['address']['county']
-            ?? 'Unknown City';
+   $data = json_decode($responseGeo, true);
+    if (!empty($data['results'][0])) {
+        $address = $data['results'][0] ;
 
-    
-    
-}
+        $barangayName = $address['suburb'] ?? 'Unknown Barangay';
+
+        $city = $address['city'] ?? 'Unknown City';
+        }
+    }
+
 
 if ($city !== "Los Baños") { 
     echo json_encode([
@@ -100,48 +127,32 @@ if ($city !== "Los Baños") {
     exit;
 }
 
+// END OF GEOLOCATION PROCESSING
+
+// SEND SMS TO BARANGAY CONTACT
 
 $barangayModel = new BarangayContact($pdo);
 $barangayInfo = $barangayModel->getByNumber($barangayName);
 $recipient = $barangayInfo['contact_number'] ?? null;
+$telcoChecker = new detectTelco($pdo);
+$telco = $telcoChecker->detect($recipient);
+$sms = new SmsService($pdo);
 
-if ($recipient && $city === "Los Baños") {
-    $username = "jarejare5kcux2025";  
-    $password = "eTeDRLyd"; 
-    $sender = "wish";         
-    $message = "Hello from DisasterReadyApp! You have a new incident report in your barangay.";
+if($recipient && $city === "Los Baños"){
 
-    $type = 0;
+    if($telco !== 'smart' && $telco !== 'unknown'){ 
 
-    $chSMS = curl_init();
-    curl_setopt_array($chSMS, [
-        CURLOPT_URL => 'https://api.easysendsms.app/bulksms',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => http_build_query([
-            'username' => $username,
-            'password' => $password,
-            'from'     => $sender,
-            'to'       => $recipient,
-            'text'     => $message,
-            'type'     => $type
-        ]),
-        CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
-        CURLOPT_TIMEOUT => 30,
-    ]);
+        $message = "Hello from DisasterReadyApp! You have a new incident report in your barangay.";
+        $sms->sendGlobe($message, $recipient);
+      
+    }elseif ($telco === 'smart' && $recipient) {
+        $message = "Hello from DisasterReadyApp! You have a new incident report in your barangay.";
+        $sms->sendSmart($recipient, $message);
 
-    $smsResponse = curl_exec($chSMS);
-    $smsCode = curl_getinfo($chSMS, CURLINFO_HTTP_CODE);
-    curl_close($chSMS);
+}   } 
+// END OF SMS SENDING
 
-    if ($smsCode !== 200) {
-        error_log("SMS failed for $recipient: $smsResponse");
-    }
-
-
-
-} 
-
+    
 $incidentModel->createIncident(
     $reporter_name,
     $reporter_contact,
@@ -157,5 +168,9 @@ echo json_encode([
     'message' => 'Incident reported successfully',
     'media' => $media_path,
     'barangay' => $barangayName,
-    'sms_sent' => $recipient ? true : false
+    'city'      => $city,
+    'sms_sent' => $recipient ? true : false,
+    'telco' => $telco,
+    "sms_result" => $result ?? null 
+    
 ]);
