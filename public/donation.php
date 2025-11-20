@@ -37,6 +37,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents("php://input"), true);
 
+
+// validation para sa amount
+
+
+if (!is_numeric($input["amount"])) {
+    return "Amount must be a number.";
+}
+if ($amount[0] === '0') {
+    return "Invalid amount format.";
+}
+
+if ($amount <= 0) {
+    return "Amount must be greater than 0.";
+}
+
+
+
+
 if($input["type"] === "card") {
       
 
@@ -86,26 +104,35 @@ if($input["type"] === "card") {
     
 }
 
-// ✅ reCAPTCHA verification
+// // ✅ reCAPTCHA verification
 
-$captchaToken = $input["g-recaptcha-response"] ?? null;
+// $captchaToken = $input["g-recaptcha-response"] ?? null;
 
-if (!$captchaToken) {
-    http_response_code(400);
-    echo json_encode(["error" => "Missing reCAPTCHA token"]);
-    exit;
-}
+// if (!$captchaToken) {
+//     http_response_code(400);
+//     echo json_encode(["error" => "Missing reCAPTCHA token"]);
+//     exit;
+// }
 
-$verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
-$verifyResponse = file_get_contents($verifyUrl . "?secret=" . urlencode($RECAPTCHA_SECRET) . "&response=" . urlencode($captchaToken));
-$captchaResult = json_decode($verifyResponse, true);
+// $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+// $verifyResponse = file_get_contents($verifyUrl . "?secret=" . urlencode($RECAPTCHA_SECRET) . "&response=" . urlencode($captchaToken));
+// $captchaResult = json_decode($verifyResponse, true);
 
-if (!$captchaResult["success"]) {
-    http_response_code(400);
-    echo json_encode(["error" => "Captcha verification failed"]);
-    exit;
-}
-// ✅ end of reCAPTCHA verification
+// if (!$captchaResult["success"]) {
+//     http_response_code(400);
+//     echo json_encode(["error" => "Captcha verification failed"]);
+//     exit;
+// }
+// // ✅ end of reCAPTCHA verification
+
+
+
+
+
+
+
+
+
 
 $requiredFields = ["amount", "description", "type", "name", "email"];
 foreach ($requiredFields as $field) {

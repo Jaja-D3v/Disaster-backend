@@ -45,11 +45,11 @@ class Donation {
         ]);
 
         return (int)$this->pdo->lastInsertId();
-    }
+    } 
 
-    public function getDonationById(int $id): ?array {
-        $stmt = $this->pdo->prepare("SELECT * FROM donations WHERE id = :id");
-        $stmt->execute([':id' => $id]);
+    public function getDonationById($paymentIntentId): ?array {
+        $stmt = $this->pdo->prepare("SELECT * FROM donations WHERE payment_intent_id = :payment_intent_id");
+        $stmt->execute([':payment_intent_id' => $paymentIntentId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) return null;
